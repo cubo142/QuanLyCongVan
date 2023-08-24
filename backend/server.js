@@ -19,8 +19,9 @@ db.once('open', () => console.log('Connect to database'))
 app.use(express.json())
 
 //lấy route
-const congvanRouter = require('./routes/congvans')
-app.use('/congvans',congvanRouter)
+const congvanRouter = require('./routes/congvanRoutes')
+app.use('/congvans',congvanRouter) //thiết lập đường dẫn sử dụng
+
 
 //listen trên port 3000
 app.listen(3000, () => console.log('Server started')) 
