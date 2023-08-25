@@ -19,28 +19,28 @@ const SideNavigationBar = () => {
                         },
                     }}
                 >
-                    <SubMenu icon={<FiHome />} label="Trang Chủ">
-                        <MenuItem component={<Link to="/" />}>Trang Chủ</MenuItem>
-                        <MenuItem component={<Link to="/quanly" />}>Quản lý</MenuItem>
-                    </SubMenu>
+                    {/* Trang chủ */}
+                    <MenuItem icon={<FiHome />} component={<Link to="/" />}>Trang Chủ</MenuItem>
+
+                    {/* Quản lý */}
                     <SubMenu icon={<FiCheckSquare />} label="Quản lý">
-                        <MenuItem>Quản lý nhân viên</MenuItem>
+                        <MenuItem component={<Link to="/quanly" />}>Quản lý nhân viên</MenuItem>
                         <MenuItem>Quản lý phòng ban</MenuItem>
                         <MenuItem>Quản lý chủ đề</MenuItem>
                     </SubMenu>
+
+                    {/* Công văn*/}
                     <SubMenu icon={<FiBookOpen />} label="Công văn">
                         <MenuItem>Công văn đến</MenuItem>
                         <MenuItem>Công văn đi</MenuItem>
                         <MenuItem>Công văn nội bộ</MenuItem>
                     </SubMenu>
-                    {/* <SubMenu label="Thêm công văn">
-                        <MenuItem component={<Link to="/" />}>Trang Chủ</MenuItem>
-                        <MenuItem component={<Link to="/quanly" />}>Quản lý</MenuItem>
-                    </SubMenu> */}
+
+                    {/* Đăng xuất */}
                     <MenuItem icon={<FiLogOut />}> Đăng xuất </MenuItem>
                 </Menu>
             </Sidebar>
-        </div>
+        </div >
     );
 };
 

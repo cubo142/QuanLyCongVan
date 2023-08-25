@@ -3,7 +3,7 @@ import SideNavigationBar from './SideNavigationBar';
 
 const layoutStyle = {
     display: "flex",
-    height:"100vhF"
+    height:"100vh"
 }
 const contentContainerStyle = {
     padding: "16px"
