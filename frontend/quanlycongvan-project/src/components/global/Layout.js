@@ -3,14 +3,14 @@ import SideNavigationBar from './SideNavigationBar';
 
 const layoutStyle = {
     display: "flex",
-    height: "fit-content",
+    height:"100vhF"
 }
 const contentContainerStyle = {
     padding: "16px"
 }
 const Layout = ({ children }) => {
     return (
-        <div style={layoutStyle}>
+        <div id="layout" style={layoutStyle}>
             <SideNavigationBar></SideNavigationBar>
             <div style={contentContainerStyle}>
                 {children}

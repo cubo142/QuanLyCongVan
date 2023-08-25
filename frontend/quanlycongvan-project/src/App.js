@@ -8,8 +8,8 @@ function App() {
     <>
       <Layout>
         <Routes>
-          <Route path="/" element={<PageTrangChu/>}/>
-          <Route path="quanly" element={<PageQuanLy/>}/>
+          <Route path="/" element={<PageTrangChu />} />
+          <Route path="quanly" element={<PageQuanLy />} />
         </Routes>
       </Layout>
 
