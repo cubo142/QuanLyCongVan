@@ -7,24 +7,15 @@ const SideNavigationBar = () => {
     return (
         <div style={{ display: 'flex', height: '100vh' }}>
             <Sidebar >
-                <Menu
-                    menuItemStyles={{
-                        button: {
-                            // the active class will be added automatically by react router
-                            // so we can use it to style the active menu item
-                            [`&.active`]: {
-                                backgroundColor: '#red',
-                                color: '#b6c8d9',
-                            },
-                        },
-                    }}
-                >
+                <Menu>
                     {/* Trang chủ */}
                     <MenuItem icon={<FiHome />} component={<Link to="/" />}>Trang Chủ</MenuItem>
 
                     {/* Quản lý */}
                     <SubMenu icon={<FiCheckSquare />} label="Quản lý">
-                        <MenuItem component={<Link to="/quanly" />}>Quản lý nhân viên</MenuItem>
+                        <MenuItem
+
+                            component={<Link to="/quanly" />}>Quản lý nhân viên</MenuItem>
                         <MenuItem>Quản lý phòng ban</MenuItem>
                         <MenuItem>Quản lý chủ đề</MenuItem>
                     </SubMenu>
