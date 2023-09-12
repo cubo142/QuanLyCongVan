@@ -17,22 +17,16 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const TrangChu = () => {
     return (
-        <div style={{
-            marginLeft: '50px'
-        }}>
+        <div>
             <h1
                 style={{
                     textAlign: "center",
                     color: "orange",
-                    fontFamily: "times new roman",
-                    fontWeight: "bold",
-                    fontSize: "30px",
-                    paddingBottom: "25px",
                 }}
             >
                 Hệ Thống Quản Lý Công Văn
             </h1>
-            <Grid container spacing={1} >
+            <Grid container spacing={1}>
                 <Grid xs={3} md={3} >
                     <Item
                         sx={{
@@ -118,7 +112,6 @@ const TrangChu = () => {
                 style={{
                     textAlign: "center",
                     color: "orange",
-                    letterSpacing: 1,
                 }}
             >
                 Xin chào, bạn đang làm việc tại Phòng Hành Chính Nhân Sự
@@ -127,122 +120,118 @@ const TrangChu = () => {
                 textAlign: "center"
             }}>Công văn đã nhận trong hôm nay:</p>
             <Grid container spacing={3}>
-            <Grid xs={3} md={3}>
-                <Item style={{
-                        width: '200px'
-                }}>
+                <Grid xs={3} md={3}>
+                    <Item>
                         <div style={{
-                            display: "flex"
+                            display: "flex",
+                            position: "relative"
                         }}>
-                        <div>
-                            <div style={{
-                                color: "orange",
-                                fontSize: "30px"
-                            }}>0</div>
-                            <div>Tổng công văn</div>
+                            <div>
+                                <div style={{
+                                    color: "orange",
+                                    fontSize: "30px",
+                                    
+                                }}>0</div>
+                                <div>Tổng công văn</div>
+                            </div><Box
+                                component="img"
+                                sx={{
+                                    height: 32,
+                                    width: 32,
+                                    position: "absolute",
+                                    right: 5,
+                                    top: 15
+                                }}
+                                alt="The house from the offer."
+                                src="https://cdn-icons-png.flaticon.com/512/2899/2899445.png"
+                            />
                         </div>
-                        <div><Box
-                            component="img"
-                            sx={{
-                                height: 32,
-                                width: 32,
-                                marginRight: "-150px",
-                                marginTop: "15px"
-                            }}
-                            alt="The house from the offer."
-                            src="https://cdn-icons-png.flaticon.com/512/2899/2899445.png"
-                        />
-                        </div>
-                        </div>
-                </Item>
-            </Grid>
-            <Grid xs={3} md={3}>
-                <Item style={{
-                        width: '200px'
-                }}>
+                    </Item>
+                </Grid>
+                <Grid xs={3} md={3}>
+                    <Item>
                         <div style={{
-                            display: "flex"
+                            display: "flex",
+                            position: "relative"
                         }}>
-                        <div>
-                            <div style={{
-                                color: "orange",
-                                fontSize: "30px"
-                            }}>0</div>
-                            <div>Văn bản đi</div>
+                            <div>
+                                <div style={{
+                                    color: "orange",
+                                    fontSize: "30px",
+                                    
+                                }}>0</div>
+                                <div>Công văn đến</div>
+                            </div><Box
+                                component="img"
+                                sx={{
+                                    height: 32,
+                                    width: 32,
+                                    position: "absolute",
+                                    right: 5,
+                                    top: 15
+                                }}
+                                alt="The house from the offer."
+                                src="https://cdn-icons-png.flaticon.com/512/2899/2899445.png"
+                            />
                         </div>
-                        <div><Box
-                            component="img"
-                            sx={{
-                                height: 32,
-                                width: 32,
-                                marginRight: "-150px",
-                                marginTop: "15px"
-                            }}
-                            alt="The house from the offer."
-                            src="https://cdn-icons-png.flaticon.com/512/2899/2899445.png"
-                        />
-                        </div>
-                        </div>
-                </Item>
-            </Grid>
-            <Grid xs={3} md={3}>
-                <Item style={{
-                        width: '200px'
-                }}>
+                    </Item>
+                </Grid>
+                <Grid xs={3} md={3}>
+                    <Item>
                         <div style={{
-                            display: "flex"
+                            display: "flex",
+                            position: "relative"
                         }}>
-                        <div>
-                            <div style={{
-                                color: "orange",
-                                fontSize: "30px"
-                            }}>0</div>
-                            <div>Văn bản đến</div>
+                            <div>
+                                <div style={{
+                                    color: "orange",
+                                    fontSize: "30px",
+                                    
+                                }}>0</div>
+                                <div>Công văn đi</div>
+                            </div><Box
+                                component="img"
+                                sx={{
+                                    height: 32,
+                                    width: 32,
+                                    position: "absolute",
+                                    right: 5,
+                                    top: 15
+                                }}
+                                alt="The house from the offer."
+                                src="https://cdn-icons-png.flaticon.com/512/2899/2899445.png"
+                            />
                         </div>
-                        <div><Box
-                            component="img"
-                            sx={{
-                                height: 32,
-                                width: 32,
-                                marginRight: "-150px",
-                                marginTop: "15px"
-                            }}
-                            alt="The house from the offer."
-                            src="https://cdn-icons-png.flaticon.com/512/2899/2899445.png"
-                        />
-                        </div>
-                        </div>
-                </Item>
-            </Grid>
-            <Grid xs={3} md={3}>
-                <Item style={{
-                        width: '200px'
-                }}>
+                    </Item>
+                </Grid>
+                <Grid xs={3} md={3}>
+                    <Item>
                         <div style={{
-                            display: "flex"
+                            display: "flex",
+                            position: "relative"
                         }}>
-                        <div>
-                            <div style={{
-                                color: "orange",
-                                fontSize: "30px"
-                            }}>0</div>
-                            <div>Văn bản nội bộ</div>
+                            <div>
+                                <div style={{
+                                    color: "orange",
+                                    fontSize: "30px",
+                                    
+                                }}>0</div>
+                                <div>Công văn nội bộ</div>
+                            </div><Box
+                                component="img"
+                                sx={{
+                                    height: 32,
+                                    width: 32,
+                                    position: "absolute",
+                                    right: 5,
+                                    top: 15
+                                }}
+                                alt="The house from the offer."
+                                src="https://cdn-icons-png.flaticon.com/512/2899/2899445.png"
+                            />
                         </div>
-                        <div><Box
-                            component="img"
-                            sx={{
-                                height: 32,
-                                width: 32,
-                                marginRight: "-150px",
-                                marginTop: "15px"
-                            }}
-                            alt="The house from the offer."
-                            src="https://cdn-icons-png.flaticon.com/512/2899/2899445.png"
-                        />
-                        </div>
-                        </div>
-                </Item>
-            </Grid>
+                    </Item>
+                </Grid>
             </Grid>
         </div>
     );
