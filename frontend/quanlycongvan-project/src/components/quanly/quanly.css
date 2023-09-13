@@ -1,0 +1,17 @@
+.button-lg {
+    width: fit-content;
+    height: fit-content;
+}
+
+.button-row {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.space-width {
+    width: 8px;
+}
+
+.space-height {
+    height: 8px
+}
