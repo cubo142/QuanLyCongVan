@@ -1,17 +1,7 @@
 import React, { useState } from 'react';
-import { Modal, Box, Button, Dialog, DialogActions, DialogTitle, DialogContent } from '@mui/material';
+import { Box, Button, Dialog, DialogActions, DialogTitle, DialogContent } from '@mui/material';
 
 
-const modalStyle = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    border: '2px solid #000',
-    boxShadow: 24,
-    backgroundColor: "white"
-};
 
 const QLThemNhanVien = () => {
 
