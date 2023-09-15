@@ -8,22 +8,20 @@ const SideNavigationBar = () => {
         <div style={{ display: 'flex', height: '100vh' }}>
             <Sidebar >
                 <Menu>
+                    <MenuItem component={<Link to="/" />}>QUẢN LÝ CÔNG VĂN</MenuItem>
                     {/* Trang chủ */}
                     <MenuItem icon={<FiHome />} component={<Link to="/" />}>Trang Chủ</MenuItem>
 
                     {/* Quản lý */}
                     <SubMenu icon={<FiCheckSquare />} label="Quản lý">
-                        <MenuItem
-
-                            component={<Link to="/quanly" />}>Quản lý nhân viên</MenuItem>
-                        <MenuItem>Quản lý phòng ban</MenuItem>
+                        <MenuItem component={<Link to="/quanly" />}>Quản lý nhân viên</MenuItem>
+                        <MenuItem component={<Link to="/phongban" />}>Quản lý phòng ban</MenuItem>
                         <MenuItem>Quản lý chủ đề</MenuItem>
                     </SubMenu>
 
                     {/* Công văn*/}
                     <SubMenu icon={<FiBookOpen />} label="Công văn">
-                        <MenuItem>Công văn đến</MenuItem>
-                        <MenuItem>Công văn đi</MenuItem>
+                        <MenuItem component={<Link to="/congvan" />}>Quản lý công văn</MenuItem>
                         <MenuItem>Công văn nội bộ</MenuItem>
                     </SubMenu>
 

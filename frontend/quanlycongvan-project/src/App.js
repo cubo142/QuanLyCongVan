@@ -1,7 +1,9 @@
 import Layout from "./components/global/Layout";
 import PageTrangChu from './pages/PageTrangChu';
+import PageQuanLy from './pages/PageQuanLy';
+import PagePhongBan from './pages/PagePhongBan';
 import { Routes, Route } from "react-router-dom";
-import QLNhanVien from "./components/quanly/QLNhanVien/QLNhanVien";
+import PageCongVan from "./pages/PageCongVan";
 
 function App() {
   return (
@@ -9,7 +11,9 @@ function App() {
       <Layout>
         <Routes>
           <Route path="/" element={<PageTrangChu />} />
-          <Route path="quanly" element={<QLNhanVien />} />
+          <Route path="quanly" element={<PageQuanLy />} />
+          <Route path="phongban" element={<PagePhongBan />} />
+          <Route path="congvan" element={<PageCongVan />} />
         </Routes>
       </Layout>
 

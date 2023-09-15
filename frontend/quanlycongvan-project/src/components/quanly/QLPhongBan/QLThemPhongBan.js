@@ -3,20 +3,20 @@ import { Box, Button, Dialog, DialogActions, DialogTitle, DialogContent, TextFie
 
 
 
-const QLThemNhanVien = () => {
+const QLThemPhongBan = () => {
 
-    const department = [
+    const manager = [
         {
-            value: 'IT',
+            value: 'Yua Mikami',
         },
         {
-            value: 'HR',
+            value: 'Miku Ohashi',
         },
         {
-            value: 'Finance',
+            value: 'Kana Momonogi',
         },
         {
-            value: 'Sales',
+            value: 'Arina Hashimoto',
         },
     ];
 
@@ -40,7 +40,7 @@ const QLThemNhanVien = () => {
                 onClose={handleClose}
             >
                 <DialogTitle>
-                    Thêm nhân viên
+                    Thêm phòng ban
                 </DialogTitle>
                 <DialogContent>
                     <Box
@@ -52,25 +52,21 @@ const QLThemNhanVien = () => {
                         autoComplete="off"
                     >
                         <div>
-                            <TextField id="outlined-first-name" label="First Name" variant="outlined" />
-                            <TextField id="outlined-last-name" label="Last Name" variant="outlined" />
+                            <TextField id="outlined-department" label="Department" variant="outlined" />
                             <TextField
-                                id="outlined-select-department"
+                                id="outlined-select-manager"
                                 select
-                                label="Department"
-                                defaultValue="IT"
-                            // helperText="Please select your department"
+                                label="Manager"
+                                defaultValue="Arina Hashimoto"
+                            // helperText="Please select manager"
                             >
-                                {department.map((option) => (
+                                {manager.map((option) => (
                                     <MenuItem key={option.value} value={option.value}>
                                         {option.value}
                                     </MenuItem>
                                 ))}
                             </TextField>
-                            <TextField id="outlined-email" label="Email" variant="outlined" />
                             <TextField id="outlined-phone" label="Phone" variant="outlined" />
-                            <TextField id="outlined-address" label="Address" variant="outlined" />
-                            <TextField id="outlined-age" label="Age" variant="outlined" />
                         </div>
                     </Box>
                 </DialogContent>
@@ -85,4 +81,4 @@ const QLThemNhanVien = () => {
     );
 };
 
-export default QLThemNhanVien;
+export default QLThemPhongBan;
