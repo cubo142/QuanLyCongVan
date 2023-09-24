@@ -18,10 +18,14 @@ db.once('open', () => console.log('Connect to database'))
 //đọc file json
 app.use(express.json())
 
-//lấy route
+//------------ROUTES-------------//
+//lấy route congvan
 const congvanRouter = require('./routes/congvanRoutes')
 app.use('/congvans',congvanRouter) //thiết lập đường dẫn sử dụng
 
+//lấy route loaicvan
+const loaicvanRouter = require('./routes/loaicvanRoutes')
+app.use('/loaicvans',loaicvanRouter) //thiết lập đường dẫn sử dụng
 
 //listen trên port 3000
 app.listen(3000, () => console.log('Server started')) 

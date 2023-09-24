@@ -3,7 +3,7 @@ const Congvan = require('../models/congvans')
 //Get All
 const getAllCongvans = async (req, res) => {
     try {
-        const congvans = await Congvan.find();
+        const congvans = await Congvan.find().populate('loaicvan');
         res.json(congvans);
     }
     catch (err) {
@@ -46,6 +46,7 @@ const updateCongvan = async (req, res) => {
             return res.status(404).json({ message: 'Congvan not found' })
         }
         else {
+            //Body nhận data truyền vào
             res.congvan.kyhieucvan = req.body.kyhieucvan
             res.congvan.ngaybanhanh = req.body.ngaybanhanh
             res.congvan.ngayhethieuluc = req.body.ngayhethieuluc

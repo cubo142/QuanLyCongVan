@@ -8,7 +8,8 @@ const pageStyle = {
     display: 'flex',
     flexDirection: 'column',
     position: "relative",
-    margin: "auto"
+    margin: "auto",
+    width: "100%"
 }
 
 //Content mẫu cho datagrid
@@ -27,14 +28,6 @@ const columns = [
     },
     { field: 'department', headerName: 'Department', width: 130 },
     { field: 'email', headerName: 'Email', width: 230 },
-    { field: 'phone', headerName: 'Phone', width: 130 },
-    { field: 'address', headerName: 'Address', width: 130 },
-    {
-        field: 'age',
-        headerName: 'Age',
-        type: 'number',
-        width: 90,
-    },
 
 ];
 
