@@ -3,9 +3,19 @@
     height: fit-content;
 }
 
+.appbar-row {
+    display: flex;
+    justify-content: space-between;
+
+}
+
 .button-row {
     display: flex;
     justify-content: flex-end;
+}
+
+.searchbar-row {
+    flex-grow: 1;
 }
 
 .space-width {
