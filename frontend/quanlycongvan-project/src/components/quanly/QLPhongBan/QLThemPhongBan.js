@@ -7,16 +7,10 @@ const QLThemPhongBan = () => {
 
     const manager = [
         {
-            value: 'Yua Mikami',
+            value: 'Lương Đình Thông',
         },
         {
-            value: 'Miku Ohashi',
-        },
-        {
-            value: 'Kana Momonogi',
-        },
-        {
-            value: 'Arina Hashimoto',
+            value: 'Đỗ Đức Minh',
         },
     ];
 
@@ -28,6 +22,13 @@ const QLThemPhongBan = () => {
 
     const handleClose = () => {
         setOpen(false)
+        setOpenInner(false)
+    }
+
+    const [openInner, setOpenInner] = useState(false);
+
+    const handleOpenInner = () => {
+        setOpenInner(true)
     }
 
     return (
@@ -52,12 +53,12 @@ const QLThemPhongBan = () => {
                         autoComplete="off"
                     >
                         <div>
-                            <TextField id="outlined-department" label="Department" variant="outlined" />
+                            <TextField id="outlined-department" label="Tên phòng ban" variant="outlined" />
                             <TextField
                                 id="outlined-select-manager"
                                 select
-                                label="Manager"
-                                defaultValue="Arina Hashimoto"
+                                label="Trưởng phòng"
+                                defaultValue="Lương Đình Thông"
                             // helperText="Please select manager"
                             >
                                 {manager.map((option) => (
@@ -66,14 +67,27 @@ const QLThemPhongBan = () => {
                                     </MenuItem>
                                 ))}
                             </TextField>
-                            <TextField id="outlined-phone" label="Phone" variant="outlined" />
+                            <TextField id="outlined-phone" label="Số điện thoại" variant="outlined" />
                         </div>
                     </Box>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose}>Disagree</Button>
+                    <Button onClick={handleClose}>Không đồng ý</Button>
+                    <Button onClick={handleOpenInner} autoFocus>
+                        Đồng ý
+                    </Button>
+                </DialogActions>
+            </Dialog>
+            <Dialog
+                open={openInner}
+                onClose={handleClose}
+            >
+                <DialogTitle>
+                    Thêm phòng ban thành công / thất bại
+                </DialogTitle>
+                <DialogActions>
                     <Button onClick={handleClose} autoFocus>
-                        Agree
+                        OK
                     </Button>
                 </DialogActions>
             </Dialog>
