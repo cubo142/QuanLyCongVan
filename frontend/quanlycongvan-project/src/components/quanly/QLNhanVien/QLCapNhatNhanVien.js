@@ -3,7 +3,8 @@ import { Box, Button, Dialog, DialogActions, DialogTitle, DialogContent, TextFie
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
-
+import IconButton from '@mui/material/IconButton';
+import { FaPen } from 'react-icons/fa';
 
 
 const QLCapNhatNhanVien = () => {
@@ -45,9 +46,9 @@ const QLCapNhatNhanVien = () => {
 
     return (
         <Box>
-            <Button variant="outlined" onClick={handleOpen}>
-                Cập nhật
-            </Button>
+            <IconButton onClick={handleOpen} >
+                <FaPen fontSize="medium" />
+            </IconButton>
             <Dialog
                 open={open}
                 onClose={handleClose}

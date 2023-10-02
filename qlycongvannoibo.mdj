@@ -872,6 +872,7 @@
 											"model": {
 												"$ref": "AAAAAAGKAX07EDNv+qw="
 											},
+											"visible": false,
 											"font": "Arial;13;0",
 											"left": 141,
 											"top": 434,
@@ -889,7 +890,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 141,
-											"top": 449,
+											"top": 434,
 											"width": 114.62451171875,
 											"height": 13
 										},
@@ -904,7 +905,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 141,
-											"top": 464,
+											"top": 449,
 											"width": 114.62451171875,
 											"height": 13
 										},
@@ -919,7 +920,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 141,
-											"top": 479,
+											"top": 464,
 											"width": 114.62451171875,
 											"height": 13
 										},
@@ -934,7 +935,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 141,
-											"top": 494,
+											"top": 479,
 											"width": 114.62451171875,
 											"height": 13
 										},
@@ -949,7 +950,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 141,
-											"top": 509,
+											"top": 494,
 											"width": 114.62451171875,
 											"height": 13
 										}
@@ -958,7 +959,7 @@
 									"left": 136,
 									"top": 399,
 									"width": 124.62451171875,
-									"height": 128
+									"height": 113
 								}
 							],
 							"font": "Arial;13;0",
@@ -1376,6 +1377,89 @@
 							},
 							"headNameLabel": {
 								"$ref": "AAAAAAGKAdIaPTSvNOY="
+							}
+						},
+						{
+							"_type": "ERDEntityView",
+							"_id": "AAAAAAGKxQHh4s+xtoA=",
+							"_parent": {
+								"$ref": "AAAAAAGKAWy5kzF0O5o="
+							},
+							"model": {
+								"$ref": "AAAAAAGKxQHh4M+vRo4="
+							},
+							"subViews": [
+								{
+									"_type": "LabelView",
+									"_id": "AAAAAAGKxQHh4s+ywfA=",
+									"_parent": {
+										"$ref": "AAAAAAGKxQHh4s+xtoA="
+									},
+									"font": "Arial;13;1",
+									"left": 600,
+									"top": 437,
+									"width": 91.419921875,
+									"height": 13,
+									"text": "User"
+								},
+								{
+									"_type": "ERDColumnCompartmentView",
+									"_id": "AAAAAAGKxQHh4s+zOIM=",
+									"_parent": {
+										"$ref": "AAAAAAGKxQHh4s+xtoA="
+									},
+									"model": {
+										"$ref": "AAAAAAGKxQHh4M+vRo4="
+									},
+									"subViews": [
+										{
+											"_type": "ERDColumnView",
+											"_id": "AAAAAAGKxQH5ls+/n7Y=",
+											"_parent": {
+												"$ref": "AAAAAAGKxQHh4s+zOIM="
+											},
+											"model": {
+												"$ref": "AAAAAAGKxQH5h8+8570="
+											},
+											"font": "Arial;13;0",
+											"left": 605,
+											"top": 460,
+											"width": 81.419921875,
+											"height": 13
+										},
+										{
+											"_type": "ERDColumnView",
+											"_id": "AAAAAAGKxQIRL8/GLc0=",
+											"_parent": {
+												"$ref": "AAAAAAGKxQHh4s+zOIM="
+											},
+											"model": {
+												"$ref": "AAAAAAGKxQIRJ8/DJUw="
+											},
+											"font": "Arial;13;0",
+											"left": 605,
+											"top": 475,
+											"width": 81.419921875,
+											"height": 13
+										}
+									],
+									"font": "Arial;13;0",
+									"left": 600,
+									"top": 455,
+									"width": 91.419921875,
+									"height": 38
+								}
+							],
+							"font": "Arial;13;0",
+							"left": 600,
+							"top": 432,
+							"width": 91.419921875,
+							"height": 61,
+							"nameLabel": {
+								"$ref": "AAAAAAGKxQHh4s+ywfA="
+							},
+							"columnCompartment": {
+								"$ref": "AAAAAAGKxQHh4s+zOIM="
 							}
 						}
 					]
@@ -2205,6 +2289,34 @@
 							"name": "idthongke",
 							"length": 0,
 							"primaryKey": true
+						}
+					]
+				},
+				{
+					"_type": "ERDEntity",
+					"_id": "AAAAAAGKxQHh4M+vRo4=",
+					"_parent": {
+						"$ref": "AAAAAAGKAWy5kzFzEtA="
+					},
+					"name": "User",
+					"columns": [
+						{
+							"_type": "ERDColumn",
+							"_id": "AAAAAAGKxQH5h8+8570=",
+							"_parent": {
+								"$ref": "AAAAAAGKxQHh4M+vRo4="
+							},
+							"name": "username",
+							"length": 0
+						},
+						{
+							"_type": "ERDColumn",
+							"_id": "AAAAAAGKxQIRJ8/DJUw=",
+							"_parent": {
+								"$ref": "AAAAAAGKxQHh4M+vRo4="
+							},
+							"name": "password",
+							"length": 0
 						}
 					]
 				}
