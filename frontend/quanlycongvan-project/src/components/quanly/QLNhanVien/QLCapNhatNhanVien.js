@@ -6,7 +6,7 @@ import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 
 
 
-const QLThemNhanVien = () => {
+const QLCapNhatNhanVien = () => {
 
     const department = [
         {
@@ -46,14 +46,14 @@ const QLThemNhanVien = () => {
     return (
         <Box>
             <Button variant="outlined" onClick={handleOpen}>
-                Thêm
+                Cập nhật
             </Button>
             <Dialog
                 open={open}
                 onClose={handleClose}
             >
                 <DialogTitle>
-                    Thêm nhân viên
+                    Cập nhật nhân viên
                 </DialogTitle>
                 <DialogContent>
                     <Box
@@ -71,7 +71,7 @@ const QLThemNhanVien = () => {
                                 id="outlined-select-department"
                                 select
                                 label="Bộ phận"
-                                defaultValue="Engineering"
+                                defaultValue="IT"
                             // helperText="Please select your department"
                             >
                                 {department.map((option) => (
@@ -109,7 +109,7 @@ const QLThemNhanVien = () => {
                 onClose={handleClose}
             >
                 <DialogTitle>
-                    Thêm nhân viên thành công / thất bại
+                    Cập nhật nhân viên thành công / thất bại
                 </DialogTitle>
                 <DialogActions>
                     <Button onClick={handleClose} autoFocus>
@@ -121,4 +121,4 @@ const QLThemNhanVien = () => {
     );
 };
 
-export default QLThemNhanVien;
+export default QLCapNhatNhanVien;

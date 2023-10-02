@@ -1,28 +1,16 @@
 import React, { useState } from 'react';
 import { Box, Button, Dialog, DialogActions, DialogTitle, DialogContent, TextField, MenuItem } from '@mui/material';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 
 
 
-const QLThemNhanVien = () => {
+const QLCapNhatPhongBan = () => {
 
-    const department = [
+    const manager = [
         {
-            value: 'Sales',
+            value: 'Lương Đình Thông',
         },
         {
-            value: 'Marketing',
-        },
-        {
-            value: 'Finance',
-        },
-        {
-            value: 'HR',
-        },
-        {
-            value: 'IT',
+            value: 'Đỗ Đức Minh',
         },
     ];
 
@@ -46,14 +34,14 @@ const QLThemNhanVien = () => {
     return (
         <Box>
             <Button variant="outlined" onClick={handleOpen}>
-                Thêm
+                Cập nhật
             </Button>
             <Dialog
                 open={open}
                 onClose={handleClose}
             >
                 <DialogTitle>
-                    Thêm nhân viên
+                    Cập nhật phòng ban
                 </DialogTitle>
                 <DialogContent>
                     <Box
@@ -65,35 +53,21 @@ const QLThemNhanVien = () => {
                         autoComplete="off"
                     >
                         <div>
-                            <TextField id="outlined-last-name" label="Họ" variant="outlined" />
-                            <TextField id="outlined-first-name" label="Tên" variant="outlined" />
+                            <TextField id="outlined-department" label="Tên phòng ban" variant="outlined" />
                             <TextField
-                                id="outlined-select-department"
+                                id="outlined-select-manager"
                                 select
-                                label="Bộ phận"
-                                defaultValue="Engineering"
-                            // helperText="Please select your department"
+                                label="Trưởng phòng"
+                                defaultValue="Lương Đình Thông"
+                            // helperText="Please select manager"
                             >
-                                {department.map((option) => (
+                                {manager.map((option) => (
                                     <MenuItem key={option.value} value={option.value}>
                                         {option.value}
                                     </MenuItem>
                                 ))}
                             </TextField>
-                            <TextField id="outlined-email" label="Email" variant="outlined" />
-                            <TextField
-                                id="outlined-password-input"
-                                label="Mật khẩu"
-                                variant="outlined"
-                                type="password"
-                                autoComplete="current-password"
-                            />
                             <TextField id="outlined-phone" label="Số điện thoại" variant="outlined" />
-
-                            <TextField id="outlined-address" label="Địa chỉ" variant="outlined" />
-                            <LocalizationProvider dateAdapter={AdapterDayjs} components={['DateTimePicker']}>
-                                <DateTimePicker label="Ngày vào làm" />
-                            </LocalizationProvider>
                         </div>
                     </Box>
                 </DialogContent>
@@ -109,7 +83,7 @@ const QLThemNhanVien = () => {
                 onClose={handleClose}
             >
                 <DialogTitle>
-                    Thêm nhân viên thành công / thất bại
+                    Cập nhật phòng ban thành công / thất bại
                 </DialogTitle>
                 <DialogActions>
                     <Button onClick={handleClose} autoFocus>
@@ -121,4 +95,4 @@ const QLThemNhanVien = () => {
     );
 };
 
-export default QLThemNhanVien;
+export default QLCapNhatPhongBan;
