@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Button, Dialog, DialogActions, DialogTitle, DialogContent, TextField, MenuItem } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
+import { FaPen } from 'react-icons/fa';
 
 
 
@@ -33,9 +35,9 @@ const QLCapNhatPhongBan = () => {
 
     return (
         <Box>
-            <Button variant="outlined" onClick={handleOpen}>
-                Cập nhật
-            </Button>
+            <IconButton onClick={handleOpen} >
+                <FaPen fontSize="medium" />
+            </IconButton>
             <Dialog
                 open={open}
                 onClose={handleClose}

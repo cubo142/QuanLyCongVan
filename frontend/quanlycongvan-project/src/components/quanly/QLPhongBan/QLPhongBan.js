@@ -10,15 +10,41 @@ const pageStyle = {
     display: 'flex',
     flexDirection: 'column',
     position: "relative",
-    margin: "auto"
+    margin: "auto",
+    width: "100%",
+}
+
+//Hiển thị option cho list
+const renderButton = (params) => {
+    return (
+        <div style={{ display: "flex" }}>
+            {/* <Link to={`/employee/${params.row.id}`}>
+                <IconButton>
+                    <FaInfo className="datagrid-icon" size={18} style={{ color: '#428af5' }} />
+                    <span className="icon-text">Info</span>
+                </IconButton>
+            </Link>
+            <ConfirmDeleteDialog
+                isUserAllow={isUserAllow}
+                onDeleteEmployee={props.onDeleteEmployee}
+                rowID={params.row.id}
+                data={props.data} /> */}
+            <QLCapNhatPhongBan />
+            <div className='space-width' />
+            <QLXoaPhongBan />
+        </div>
+    )
 }
 
 //Content mẫu cho datagrid
+//flex: 1 means the following:
+//flex-grow : 1;    flex-shrink : 1;    flex-basis : 0;
 const columns = [
-    { field: 'id', headerName: 'ID', width: 70 },
-    { field: 'department', headerName: 'Tên phòng ban', width: 130 },
-    { field: 'manager', headerName: 'Trưởng phòng', width: 130 },
-    { field: 'phone', headerName: 'Số điện thoại', width: 130 },
+    { field: 'id', headerName: 'ID', flex: 1 },
+    { field: 'department', headerName: 'Tên phòng ban', flex: 1 },
+    { field: 'manager', headerName: 'Trưởng phòng', flex: 1 },
+    { field: 'phone', headerName: 'Số điện thoại', flex: 1 },
+    { field: 'option', headerName: 'Chức năng', flex: 1, renderCell: renderButton, sortable: false }
 ];
 
 const rows = [{"id":1,"department":"Sales","manager":"Gretchen Frusher","phone":"403-591-2806"},
@@ -30,26 +56,9 @@ const rows = [{"id":1,"department":"Sales","manager":"Gretchen Frusher","phone":
 const QLPhongBan = () => {
     return (
         <Box style={pageStyle}>
-            <div className='appbar-row'>
-                <div className="searchbar-row">
-                    <div className="search-bar">
-                    </div>
-                </div>
-                <div className="button-row">
-                <div className='space-width' />
                     <div className="add-button">
                         <QLThemPhongBan />
                     </div>
-                    <div className='space-width' />
-                    <div className="delete-button">
-                        <QLXoaPhongBan />
-                    </div>
-                    <div className='space-width' />
-                    <div className="update-button">
-                        <QLCapNhatPhongBan />
-                    </div>
-                </div>
-            </div>
 
             <div className='space-height' />
             <div style={{ height: '100%', width: '100%' }}>

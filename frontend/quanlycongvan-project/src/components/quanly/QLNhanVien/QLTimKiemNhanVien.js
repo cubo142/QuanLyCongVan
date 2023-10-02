@@ -2,7 +2,8 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
-import SearchIcon from '@mui/icons-material/Search';
+import IconButton from '@mui/material/IconButton';
+import { FaSearch } from 'react-icons/fa';
 import InputAdornment from '@mui/material/InputAdornment';
 
 const QLTimKiemNhanVien = () => {
@@ -16,7 +17,6 @@ const QLTimKiemNhanVien = () => {
                 options={rows.map((option) => option.firstName)}
                 renderInput={(params) =>
                     <TextField
-                        sx={{ width: "200px" }}
                         {...params}
                         label="Tìm kiếm"
                         InputProps={{
@@ -24,7 +24,9 @@ const QLTimKiemNhanVien = () => {
                             type: 'search',
                             startAdornment: (
                                 <InputAdornment position="start">
-                                    <SearchIcon fontSize='medium' />
+                                                <IconButton>
+                <FaSearch fontSize="medium" />
+            </IconButton>
                                 </InputAdornment>
                             ),
                         }}

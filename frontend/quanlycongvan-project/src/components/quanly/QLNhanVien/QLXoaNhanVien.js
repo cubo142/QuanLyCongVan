@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Button, Dialog, DialogActions, DialogTitle} from '@mui/material';
+import IconButton from '@mui/material/IconButton';
+import { FaTrash } from 'react-icons/fa';
 
 
 
@@ -17,9 +19,9 @@ const QLXoaNhanVien = () => {
 
     return (
         <Box>
-            <Button variant="outlined" onClick={handleOpen}>
-                Xóa
-            </Button>
+             <IconButton onClick={handleOpen} >
+                <FaTrash fontSize="medium" />
+            </IconButton>
             <Dialog
                 open={open}
                 onClose={handleClose}
