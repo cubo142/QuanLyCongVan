@@ -30,6 +30,7 @@ const renderButton = (params) => {
                 rowID={params.row.id}
                 data={props.data} /> */}
             <QLCapNhatNhanVien />
+
         </div>
     )
 }
@@ -46,12 +47,12 @@ const columns = [
         valueGetter: (params) =>
             `${params.row.firstName || ''} ${params.row.lastName || ''}`,
     },
-    { field: 'department', headerName: 'Bộ phận', width: 70 },
-    { field: 'email', headerName: 'Email', width: 200 },
-    { field: 'startDate', headerName: 'Ngày vào làm', width: 40 },
-    { field: 'phone', headerName: 'Số điện thoại', width: 40 },
-    { field: 'address', headerName: 'Địa chỉ', width: 130 },
-    { field: 'option', headerName: 'Option', width: 130, renderCell: renderButton, sortable: false }
+    { field: 'department', headerName: 'Bộ phận', minWidth: 70 },
+    { field: 'email', headerName: 'Email', minWidth: 70 },
+    { field: 'startDate', headerName: 'Ngày vào làm', minWidth: 70 },
+    { field: 'phone', headerName: 'Số điện thoại', minWidth: 70 },
+    { field: 'address', headerName: 'Địa chỉ', minWidth: 70 },
+    { field: 'option', headerName: 'Option', minWidth: 130, renderCell: renderButton, sortable: false }
 ];
 
 const rows = [{ "id": 1, "firstName": "Prince", "lastName": "Jachimak", "department": "HR", "email": "pjachimak0@dell.com", "phone": "930-297-9967", "address": "473 Dahle Way", "startDate": "6/9/2023" },
