@@ -44,7 +44,8 @@ const congvanSchema = new mongoose.Schema({
     loaicvan:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'Loaicvan'
-    }
+    },
+    
 })
 
 //mongoose.model("tên model",schema)

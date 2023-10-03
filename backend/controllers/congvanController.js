@@ -25,7 +25,8 @@ const createCongvan = async (req, res) => {
         trangthai: req.body.trangthai,
         ngaygui: req.body.ngaygui,
         file: req.body.file,
-        loaicvan: req.body.loaicvan
+        loaicvan: req.body.loaicvan,
+        
     })
     try {
         const newCongvan = await congvan.save();
