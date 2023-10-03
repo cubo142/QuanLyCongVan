@@ -45,7 +45,7 @@ const QLThemNhanVien = () => {
 
     return (
         <Box>
-            <Button variant="outlined" onClick={handleOpen}>
+            <Button variant="outlined" onClick={handleOpen} size='large'>
                 Thêm
             </Button>
             <Dialog
