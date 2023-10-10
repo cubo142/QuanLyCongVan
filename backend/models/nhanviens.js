@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const Phongban = require('./Phongbans')
+const Phongban = require('./phongbans')
 
 const nhanvienSchema = new mongoose.Schema({
     tennhanvien: {

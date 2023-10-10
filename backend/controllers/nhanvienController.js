@@ -3,7 +3,7 @@ const Nhanvien = require('../models/nhanviens')
 //Get All
 const getAllNhanviens = async (req, res) => {
     try {
-        const nhanviens = await nhanvien.find().populate('phongban');
+        const nhanviens = await Nhanvien.find().populate('phongban');
         res.json(nhanviens);
     }
     catch (err) {
@@ -11,18 +11,15 @@ const getAllNhanviens = async (req, res) => {
     }
 }
 
-
-
 //Create 1
 const createNhanvien = async (req, res) => {
     const nhanvien = new Nhanvien({
         tennhanvien: req.body.tennhanvien,
+        phongban: req.body.phongban,
         email: req.body.email,
         ngayvaolam: req.body.ngayvaolam,
         sdtnhanvien: req.body.sdtnhanvien,
         diachi: req.body.diachi,
-        phongban: req.body.phongban
-        
     })
     try {
         const newNhanvien = await nhanvien.save();
@@ -37,7 +34,7 @@ const createNhanvien = async (req, res) => {
 
 //Update 1
 const updateNhanvien = async (req, res) => {
-    const nhanvien = await nhanvien.findById(req.params.id)
+    const nhanvien = await Nhanvien.findById(req.params.id)
     try {
         if (nhanvien == null) {
             return res.status(404).json({ message: 'Không tìm thấy nhân viên' })

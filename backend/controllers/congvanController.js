@@ -3,7 +3,7 @@ const Congvan = require('../models/congvans')
 //Get All
 const getAllCongvans = async (req, res) => {
     try {
-        const congvans = await Congvan.find().populate('loaicvan');
+        const congvans = await Congvan.find().populate('loaicvan').populate('chudecvan').populate('phongban').populate('linhvuc');
         res.json(congvans);
     }
     catch (err) {
@@ -11,21 +11,22 @@ const getAllCongvans = async (req, res) => {
     }
 }
 
-
-
 //Create 1
 const createCongvan = async (req, res) => {
     const congvan = new Congvan({
+        loaicvan: req.body.loaicvan,
+        chudecvan: req.body.chudecvan,
+        phongban: req.body.phongban,
+        linhvuc: req.body.linhvuc,
         kyhieucvan: req.body.kyhieucvan,
         ngaybanhanh: req.body.ngaybanhanh,
         ngayhethieuluc: req.body.ngayhethieuluc,
         nguoinhan: req.body.nguoinhan,
         trichyeu: req.body.trichyeu,
         noidung: req.body.noidung,
+        file: req.body.file,
         trangthai: req.body.trangthai,
         ngaygui: req.body.ngaygui,
-        file: req.body.file,
-        loaicvan: req.body.loaicvan
     })
     try {
         const newCongvan = await congvan.save();
@@ -53,9 +54,9 @@ const updateCongvan = async (req, res) => {
             res.congvan.nguoinhan = req.body.nguoinhan
             res.congvan.trichyeu = req.body.trichyeu
             res.congvan.noidung = req.body.noidung
+            res.congvan.file = req.body.file
             res.congvan.trangthai = req.body.trangthai
             res.congvan.ngaygui = req.body.ngaygui
-            res.congvan.file = req.body.file
             const updateCongvan = await res.congvan.save()
             res.json(updateCongvan)
         }

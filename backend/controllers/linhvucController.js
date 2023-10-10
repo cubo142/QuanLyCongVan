@@ -11,8 +11,6 @@ const getAllLinhvucs = async (req, res) => {
     }
 }
 
-
-
 //Create 1
 const createLinhvuc = async (req, res) => {
     const linhvuc = new Linhvuc({

@@ -11,8 +11,6 @@ const getAllChudecvans = async (req, res) => {
     }
 }
 
-
-
 //Create 1
 const createChudecvan = async (req, res) => {
     const chudecvan = new Chudecvan({

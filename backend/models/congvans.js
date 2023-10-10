@@ -1,7 +1,26 @@
 const mongoose = require('mongoose')
 const Loaicvan = require('./loaicvans')
+const Chudecvan = require('./chudecvans')
+const Phongban = require('./phongbans')
+const Linhvuc = require('./linhvucs')
 
 const congvanSchema = new mongoose.Schema({
+    loaicvan:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Loaicvan'
+    },
+    chudecvan:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Chudecvan'
+    },
+    phongban:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Phongban'
+    },
+    linhvuc:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Linhvuc'
+    },
     kyhieucvan: {
         type: String,
         required: false
@@ -28,6 +47,10 @@ const congvanSchema = new mongoose.Schema({
         type: String,
         required: false
     },
+    file: {
+        type: Buffer,
+        required: false
+    },
     trangthai: {
         type: Number,
         required: false
@@ -37,14 +60,6 @@ const congvanSchema = new mongoose.Schema({
         required: false,
         default: Date.now
     },
-    file: {
-        type: Buffer,
-        required: false
-    },
-    loaicvan:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'Loaicvan'
-    }
 })
 
 //mongoose.model("tên model",schema)

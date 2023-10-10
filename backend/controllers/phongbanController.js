@@ -11,8 +11,6 @@ const getAllPhongbans = async (req, res) => {
     }
 }
 
-
-
 //Create 1
 const createPhongban = async (req, res) => {
     const phongban = new Phongban({
