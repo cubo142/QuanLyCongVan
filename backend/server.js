@@ -27,5 +27,7 @@ app.use('/congvans',congvanRouter) //thiết lập đường dẫn sử dụng
 const loaicvanRouter = require('./routes/loaicvanRoutes')
 app.use('/loaicvans',loaicvanRouter) //thiết lập đường dẫn sử dụng
 
+//....
+
 //listen trên port 3000
 app.listen(3000, () => console.log('Server started')) 
