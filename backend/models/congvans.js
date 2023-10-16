@@ -5,22 +5,6 @@ const Phongban = require('./phongbans')
 const Linhvuc = require('./linhvucs')
 
 const congvanSchema = new mongoose.Schema({
-    loaicvan:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'Loaicvan'
-    },
-    chudecvan:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'Chudecvan'
-    },
-    phongban:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'Phongban'
-    },
-    linhvuc:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'Linhvuc'
-    },
     kyhieucvan: {
         type: String,
         required: false
@@ -64,11 +48,30 @@ const congvanSchema = new mongoose.Schema({
         type: Buffer,
         required: false
     },
-    loaicvan:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'Loaicvan'
+    coquanbanhanh: {
+        type: String,
+        required: false
     },
-    
+    noiluubanchinh: {
+        type: String,
+        require: false
+    },
+    loaicvan: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Loaicvan'
+    },
+    chudecvan: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Chudecvan'
+    },
+    phongban: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Phongban'
+    },
+    linhvuc: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Linhvuc'
+    },
 })
 
 //mongoose.model("tên model",schema)
