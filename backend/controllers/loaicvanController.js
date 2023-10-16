@@ -11,8 +11,6 @@ const getAllLoaicvans = async (req, res) => {
     }
 }
 
-
-
 //Create 1
 const createLoaicvan = async (req, res) => {
     const loaicvan = new Loaicvan({

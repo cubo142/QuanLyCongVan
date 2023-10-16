@@ -27,7 +27,21 @@ app.use('/congvans',congvanRouter) //thiết lập đường dẫn sử dụng
 const loaicvanRouter = require('./routes/loaicvanRoutes')
 app.use('/loaicvans',loaicvanRouter) //thiết lập đường dẫn sử dụng
 
-//....
+//lấy route phongban
+const phongbanRouter = require('./routes/phongbanRoutes')
+app.use('/phongbans',phongbanRouter) //thiết lập đường dẫn sử dụng
+
+//lấy route linhvuc
+const linhvucRouter = require('./routes/linhvucRoutes')
+app.use('/linhvucs',linhvucRouter) //thiết lập đường dẫn sử dụng
+
+//lấy route nhanvien
+const nhanvienRouter = require('./routes/nhanvienRoutes')
+app.use('/nhanviens',nhanvienRouter) //thiết lập đường dẫn sử dụng
+
+//lấy route chudecvan
+const chudecvanRouter = require('./routes/chudecvanRoutes')
+app.use('/chudecvans',chudecvanRouter) //thiết lập đường dẫn sử dụng
 
 //listen trên port 3000
 app.listen(3000, () => console.log('Server started')) 
