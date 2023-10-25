@@ -8,6 +8,7 @@ import { TabList } from '@material-ui/lab';
 import { TabPanel } from '@material-ui/lab';
 import CVanDen from './CVanDen/CVanDen';
 import CVanDi from './CVanDi/CVanDi';
+import { useGetCongVan } from '../../api/CongVan/useCongVan';
 
 const pageStyle = {
     display: 'flex',
@@ -18,6 +19,9 @@ const pageStyle = {
 
 
 const CVanMain = () => {
+
+    //Lấy data congvans
+    const { data, isLoading, error } = useGetCongVan();
 
     const [age, setAge] = useState('')
 
@@ -33,8 +37,20 @@ const CVanMain = () => {
         setValue(newValue);
     };
 
+
+    if (isLoading) {
+        return "Đang tải ..."
+    }
+
+    if (error) {
+        return <div>{error.message}</div>;
+    }
+
+    //Kiểm tra data đã fetch chưa
+    console.log(data)
+
     return (
-        <div>
+        < div >
             <Box style={pageStyle}>
                 <div className='section-container'>
                     <Grid container spacing={2}>
@@ -156,7 +172,7 @@ const CVanMain = () => {
                 </div>
 
             </Box>
-        </div>
+        </div >
     );
 };
 
