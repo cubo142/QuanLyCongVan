@@ -6,9 +6,9 @@ const nhanvienSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    phongban:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'Phongban'
+    phongban: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Phongban'
     },
     email: {
         type: String,
@@ -17,7 +17,6 @@ const nhanvienSchema = new mongoose.Schema({
     ngayvaolam: {
         type: Date,
         required: true,
-        default: Date.now
     },
     sdtnhanvien: {
         type: Number,

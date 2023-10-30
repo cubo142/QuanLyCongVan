@@ -52,5 +52,5 @@ app.use('/nhanviens', nhanvienRouter) //thiết lập đường dẫn sử dụn
 const chudecvanRouter = require('./routes/chudecvanRoutes')
 app.use('/chudecvans', chudecvanRouter) //thiết lập đường dẫn sử dụng
 
-//listen trên port 3000
-app.listen(3000, () => console.log('Server started')) 
+//listen trên port 8000
+app.listen(8000, () => console.log('Server started')) 

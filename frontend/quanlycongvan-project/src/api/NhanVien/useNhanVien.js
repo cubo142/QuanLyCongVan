@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from 'react-query';
-import { getNhanVien, deleteNhanVien,getNhanVienById,addNhanVien,updateNhanVien } from './nhanvienApi';
+import { getNhanVien, deleteNhanVien, getNhanVienById, addNhanVien, updateNhanVien } from './nhanvienApi';
 
 //Sử dụng react-query khai báo các hooks
 export const useGetNhanVien = () => {

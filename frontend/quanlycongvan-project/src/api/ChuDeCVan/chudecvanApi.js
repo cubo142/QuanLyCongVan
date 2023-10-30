@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const chudecvanApi = axios.create({
-    baseURL: "http://localhost:3000"
+    baseURL: "http://localhost:8000"
 })
 
 export const getChuDeCVan = async (chudecvan) => {

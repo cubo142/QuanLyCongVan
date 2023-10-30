@@ -1,7 +1,7 @@
 import React from 'react';
 import QLNhanVien from '../components/quanly/QLNhanVien/QLNhanVien';
 
-const PageQuanLy = () => {
+const PageNhanVien = () => {
     return (
         <div>
             <QLNhanVien />
@@ -9,4 +9,4 @@ const PageQuanLy = () => {
     );
 };
 
-export default PageQuanLy;
+export default PageNhanVien;
