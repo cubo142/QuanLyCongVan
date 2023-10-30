@@ -8,7 +8,10 @@ import { TabList } from '@material-ui/lab';
 import { TabPanel } from '@material-ui/lab';
 import CVanDen from './CVanDen/CVanDen';
 import CVanDi from './CVanDi/CVanDi';
-import { useGetCongVan } from '../../api/CongVan/useCongVan';
+import CVanNoiBo from './CVanNoiBo/CVanNoiBo';
+import CVanThem from './CVanThem';
+import CVanXoa from './CVanXoa';
+import CVanUpdate from './CVanUpdate';
 
 const pageStyle = {
     display: 'flex',
@@ -20,8 +23,6 @@ const pageStyle = {
 
 const CVanMain = () => {
 
-    //Lấy data congvans
-    const { data, isLoading, error } = useGetCongVan();
 
     const [age, setAge] = useState('')
 
@@ -38,21 +39,13 @@ const CVanMain = () => {
     };
 
 
-    if (isLoading) {
-        return "Đang tải ..."
-    }
 
-    if (error) {
-        return <div>{error.message}</div>;
-    }
-
-    //Kiểm tra data đã fetch chưa
-    console.log(data)
 
     return (
         < div >
             <Box style={pageStyle}>
                 <div className='section-container'>
+                    <h3>Tìm kiếm</h3>
                     <Grid container spacing={2}>
                         <Grid item xs={3}>
                             <TextField
@@ -158,13 +151,17 @@ const CVanMain = () => {
                                 <TabList onChange={handleChangeTab}>
                                     <Tab label="CÔNG VĂN ĐẾN" value='1'></Tab>
                                     <Tab label="CÔNG VĂN ĐI" value='2'></Tab>
+                                    <Tab label="CÔNG VĂN NỘI BỘ" value='3'></Tab>
                                 </TabList>
                             </Box>
                             <TabPanel value='1'>
-                                <CVanDen />
+                                <CVanDen CVanXoa={CVanXoa} CVanThem={CVanThem} CVanUpdate={CVanUpdate} />
                             </TabPanel>
                             <TabPanel value='2'>
-                                <CVanDi />
+                                <CVanDi CVanXoa={CVanXoa} CVanThem={CVanThem} CVanUpdate={CVanUpdate} />
+                            </TabPanel>
+                            <TabPanel value='3'>
+                                <CVanNoiBo CVanXoa={CVanXoa} CVanThem={CVanThem} CVanUpdate={CVanUpdate} />
                             </TabPanel>
                         </TabContext>
                     </Box>

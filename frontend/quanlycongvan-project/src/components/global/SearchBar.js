@@ -6,7 +6,7 @@ import IconButton from '@mui/material/IconButton';
 import { FaSearch } from 'react-icons/fa';
 import InputAdornment from '@mui/material/InputAdornment';
 
-const QLTimKiemNhanVien = () => {
+const SearchBar = () => {
 
     return (
         <Box>
@@ -24,9 +24,9 @@ const QLTimKiemNhanVien = () => {
                             type: 'search',
                             startAdornment: (
                                 <InputAdornment position="start">
-                                                <IconButton>
-                <FaSearch fontSize="medium" />
-            </IconButton>
+                                    <IconButton>
+                                        <FaSearch fontSize="medium" />
+                                    </IconButton>
                                 </InputAdornment>
                             ),
                         }}
@@ -47,4 +47,4 @@ const rows = [{ "id": 1, "firstName": "Prince", "lastName": "Jachimak", "departm
 { "id": 9, "firstName": "Sheppard", "lastName": "Guarin", "department": "Finance", "email": "sguarin8@state.tx.us", "phone": "274-376-4935", "address": "68 Walton Place", "startDate": "4/17/2023" },
 { "id": 10, "firstName": "Manon", "lastName": "Hazelden", "department": "HR", "email": "mhazelden9@ted.com", "phone": "565-352-1728", "address": "0 Michigan Road", "startDate": "6/10/2023" }]
 
-export default QLTimKiemNhanVien;
+export default SearchBar;

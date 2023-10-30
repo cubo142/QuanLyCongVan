@@ -1,0 +1,12 @@
+QUẢN LÝ CÔNG VĂN:
+1. Loại công văn có 3 loại khi tạo công văn: Công văn đến, công văn đi
+, công văn nội bộ
+
++ Công văn nội bộ là do cơ quan tạo ra lưu thông trong nội bộ => 
+khi thêm mới công văn, phòng ban có thể
+để trống nếu đó không phải là công văn nội bộ
+
+
+2. khi xem chi tiết công văn có thể chọn các phòng ban để gửi công văn đi
+3. Khi xem chi tiết các phòng ban sẽ có danh sách các công văn đã nhận
+

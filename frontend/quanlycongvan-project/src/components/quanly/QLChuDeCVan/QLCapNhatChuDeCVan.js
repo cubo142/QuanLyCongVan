@@ -72,9 +72,9 @@ const QLCapNhatChuDeCVan = () => {
                     </Box>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose}>Không đồng ý</Button>
+                    <Button onClick={handleClose}>HỦY</Button>
                     <Button onClick={handleOpenInner} autoFocus>
-                        Đồng ý
+                        XÁC NHẬN
                     </Button>
                 </DialogActions>
             </Dialog>

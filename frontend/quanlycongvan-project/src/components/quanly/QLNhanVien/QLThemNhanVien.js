@@ -65,12 +65,11 @@ const QLThemNhanVien = () => {
                         autoComplete="off"
                     >
                         <div>
-                            <TextField id="outlined-last-name" label="Họ" variant="outlined" />
-                            <TextField id="outlined-first-name" label="Tên" variant="outlined" />
+                            <TextField id="tennhanvien" label="Họ và Tên" variant="outlined" />
                             <TextField
                                 id="outlined-select-department"
                                 select
-                                label="Bộ phận"
+                                label="Phòng ban"
                                 defaultValue="IT"
                             // helperText="Please select your department"
                             >
@@ -82,15 +81,13 @@ const QLThemNhanVien = () => {
                             </TextField>
                             <TextField id="outlined-email" label="Email" variant="outlined" />
                             <TextField
-                                id="outlined-password-input"
-                                label="Mật khẩu"
+                                id="email"
+                                label="email"
                                 variant="outlined"
-                                type="password"
-                                autoComplete="current-password"
                             />
-                            <TextField id="outlined-phone" label="Số điện thoại" variant="outlined" />
+                            <TextField id="sdtnhanvien" label="Số điện thoại" variant="outlined" />
 
-                            <TextField id="outlined-address" label="Địa chỉ" variant="outlined" />
+                            <TextField id="diachi" label="Địa chỉ" variant="outlined" />
                             <LocalizationProvider dateAdapter={AdapterDayjs} components={['DateTimePicker']}>
                                 <DateTimePicker label="Ngày vào làm" />
                             </LocalizationProvider>
@@ -98,9 +95,9 @@ const QLThemNhanVien = () => {
                     </Box>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose}>Không đồng ý</Button>
+                    <Button onClick={handleClose}>HỦY</Button>
                     <Button onClick={handleOpenInner} autoFocus>
-                        Đồng ý
+                        XÁC NHẬN
                     </Button>
                 </DialogActions>
             </Dialog>

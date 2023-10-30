@@ -1,7 +1,9 @@
 import React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 
-const CVanDen = (props) => {
+
+const CVanNoiBo = (props) => {
+
     const CVanThemButton = props.CVanThem;
     const CVanXoaButton = props.CVanXoa;
     const CVanUpdateButton = props.CVanUpdate;
@@ -52,11 +54,10 @@ const CVanDen = (props) => {
         { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
     ];
 
-
     return (
         <>
             <div style={{ float: "right" }}><CVanThemButton /></div>
-            <h5>Công văn đến</h5>
+            <h5>Công văn nội bộ</h5>
             <div style={{ height: '100%', width: '100%' }}>
                 <DataGrid
                     rows={rows}
@@ -74,4 +75,4 @@ const CVanDen = (props) => {
     );
 };
 
-export default CVanDen;
+export default CVanNoiBo;
