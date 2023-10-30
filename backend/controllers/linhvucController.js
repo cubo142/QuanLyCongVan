@@ -35,9 +35,9 @@ const updateLinhvuc = async (req, res) => {
         }
         else {
             //Body nhận data truyền vào
-            res.linhvuc.tenlinhvuc = req.body.tenlinhvuc
-            res.linhvuc.kyhieu = req.body.kyhieu
-            const updateLinhvuc = await res.linhvuc.save()
+            linhvuc.tenlinhvuc = req.body.tenlinhvuc
+            linhvuc.kyhieu = req.body.kyhieu
+            const updateLinhvuc = await linhvuc.save()
             res.json(updateLinhvuc)
         }
 
@@ -55,7 +55,7 @@ const deleteLinhvuc = async (req, res) => {
             return res.status(404).json({ message: 'Không tìm thấy lĩnh vực' })
         }
         else {
-            await res.linhvuc.deleteOne()
+            await linhvuc.deleteOne()
             res.json({ messasge: 'Xóa thành công' })
         }
     } catch (err) {

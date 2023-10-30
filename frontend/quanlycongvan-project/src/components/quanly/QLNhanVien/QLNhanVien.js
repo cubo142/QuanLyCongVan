@@ -6,12 +6,13 @@ import QLXoaNhanVien from './QLXoaNhanVien'
 import QLCapNhatNhanVien from './QLCapNhatNhanVien'
 import SearchBar from '../../global/SearchBar';
 import '../quanly.css'
-import { useGetNhanVien } from '../../../api/NhanVien/useNhanVien';
+import { useDeleteNhanVien, useGetNhanVien } from '../../../api/NhanVien/useNhanVien';
 import { useGetPhongBan } from '../../../api/PhongBan/usePhongBan';
 
 
 const QLNhanVien = () => {
     //Lấy data
+    const deleteNhanVien = useDeleteNhanVien();
     const { data: nhanvienData, isLoading, error } = useGetNhanVien();
     const { data: phongbanData } = useGetPhongBan();
     if (isLoading) {
@@ -30,13 +31,20 @@ const QLNhanVien = () => {
         width: "100%"
     }
 
+    //
+    const onDeleteNhanVien = async (id) => {
+        await deleteNhanVien.mutateAsync(id);
+        // Sau khi xóa thành công, cập nhật dữ liệu bằng cách gọi refetch()
+       
+    }
+
     //Hiển thị option cho list
     const renderButton = (params) => {
         return (
             <div style={{ display: "flex" }}>
-                <QLCapNhatNhanVien />
+                <QLCapNhatNhanVien nhanvienID={params.row.id} nhanvienData={nhanvienData} phongbanData={phongbanData} />
                 <div className='space-width' />
-                <QLXoaNhanVien />
+                <QLXoaNhanVien onDeleteNhanVien={onDeleteNhanVien} nhanvienID={params.row.id} />
             </div>
         )
     }

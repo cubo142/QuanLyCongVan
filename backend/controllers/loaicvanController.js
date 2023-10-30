@@ -34,9 +34,9 @@ const updateLoaicvan = async (req, res) => {
             return res.status(404).json({ message: 'Loaicvan not found' })
         }
         else {
-            res.loaicvan.tenloaicvan = req.body.tenloaicvan
-            res.loaicvan.kyhieu = req.body.kyhieu
-            const updateLoaicvan = await res.loaicvan.save()
+            loaicvan.tenloaicvan = req.body.tenloaicvan
+            loaicvan.kyhieu = req.body.kyhieu
+            const updateLoaicvan = await loaicvan.save()
             res.json(updateLoaicvan)
         }
 
@@ -54,7 +54,7 @@ const deleteLoaicvan = async (req, res) => {
             return res.status(404).json({ message: 'Loaicvan not found' })
         }
         else {
-            await res.loaicvan.deleteOne()
+            await loaicvan.deleteOne()
             res.json({ messasge: 'Delete successful' })
         }
     } catch (err) {

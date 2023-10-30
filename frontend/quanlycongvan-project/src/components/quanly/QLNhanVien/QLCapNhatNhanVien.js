@@ -5,27 +5,10 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import IconButton from '@mui/material/IconButton';
 import { FaPen } from 'react-icons/fa';
+import { useUpdateNhanVien } from '../../../api/NhanVien/useNhanVien';
+import dayjs from 'dayjs';
 
-
-const QLCapNhatNhanVien = () => {
-
-    const department = [
-        {
-            value: 'Sales',
-        },
-        {
-            value: 'Marketing',
-        },
-        {
-            value: 'Finance',
-        },
-        {
-            value: 'HR',
-        },
-        {
-            value: 'IT',
-        },
-    ];
+const QLCapNhatNhanVien = (props) => {
 
     const [open, setOpen] = useState(false);
 
@@ -36,6 +19,12 @@ const QLCapNhatNhanVien = () => {
     const handleClose = () => {
         setOpen(false)
         setOpenInner(false)
+        // setTennhanvien(nhanvienDataById.tennhanvien)
+        // setPhongban(nhanvienDataById.phongban._id)
+        // setEmail(nhanvienDataById.email)
+        // setNgayvaolam(dayjs(nhanvienDataById.ngayvaolam))
+        // setSdtnhanvien(nhanvienDataById.sdtnhanvien)
+        // setDiachi(nhanvienDataById.diachi)
     }
 
     const [openInner, setOpenInner] = useState(false);
@@ -44,6 +33,79 @@ const QLCapNhatNhanVien = () => {
         setOpenInner(true)
     }
 
+    //Hooks cần sử dụng được tạo với react-query
+    const updateNhanVien = useUpdateNhanVien();
+
+
+    //Lấy props
+    const phongbanData = props.phongbanData;
+    const nhanvienID = props.nhanvienID;
+    const nhanvienData = props.nhanvienData;
+
+    //Lấy data nhân viên dựa trên id
+    const nhanvienDataById = nhanvienData.find(item => item._id === nhanvienID)
+
+    //Khai báo các state
+    const [tennhanvien, setTennhanvien] = useState(nhanvienDataById.tennhanvien)
+    const [phongban, setPhongban] = useState(nhanvienDataById.phongban._id)
+    const [email, setEmail] = useState(nhanvienDataById.email)
+    const [ngayvaolam, setNgayvaolam] = useState(dayjs(nhanvienDataById.ngayvaolam))
+    const [sdtnhanvien, setSdtnhanvien] = useState(nhanvienDataById.sdtnhanvien)
+    const [diachi, setDiachi] = useState(nhanvienDataById.diachi)
+    const [error, setError] = useState("")
+
+    //MenuItem cho PhongBan Select
+    let phongbanSelect = null;
+    if (phongbanData) {
+        phongbanSelect = phongbanData.map((phongban) => (
+            <MenuItem key={phongban._id} value={phongban._id}>
+                {phongban.tenphongban}
+            </MenuItem>
+        ))
+    }
+
+    //các phương thức setState
+    const onTenNhanVienChange = (e) => {
+        setTennhanvien(e.target.value);
+    }
+    const onPhongBanChange = (e) => {
+        setPhongban(e.target.value);
+    }
+    const onEmailChange = (e) => {
+        setEmail(e.target.value);
+    }
+    const onNgayVaoLamChange = (selectedDate) => {
+        setNgayvaolam(selectedDate);
+    }
+    const onSdtNhanVienChange = (e) => {
+        setSdtnhanvien(e.target.value);
+    }
+    const onDiaChiChange = (e) => {
+        setDiachi(e.target.value);
+    }
+
+
+    //Phương thức thêm nhân viên
+    const onUpdateNhanVien = async (nhanvien) => {
+        await updateNhanVien.mutateAsync(nhanvien )
+    }
+
+    const onSubmitNhanVien = () => {
+        if (!tennhanvien || !diachi || !ngayvaolam || !sdtnhanvien || !email || !phongban) {
+            setError('Please fill in all required fields');
+        }
+        setError('');
+        onUpdateNhanVien({
+            nhanvienID,
+            tennhanvien,
+            phongban,
+            diachi,
+            sdtnhanvien,
+            email,
+            ngayvaolam
+        })
+        handleClose()
+    }
     return (
         <Box>
             <IconButton onClick={handleOpen} >
@@ -63,41 +125,54 @@ const QLCapNhatNhanVien = () => {
                             '& .MuiTextField-root': { m: 1, width: '30ch' },
                         }}
                         noValidate
-                        autoComplete="off"
-                    >
+                        autoComplete="off">
                         <div>
-                            <TextField id="tennhanvien" label="Họ và Tên" variant="outlined" />
+                            {error}
+                            <TextField
+                                id="tennhanvien"
+                                onChange={onTenNhanVienChange}
+                                value={tennhanvien}
+                                label="Họ và Tên"
+                                variant="outlined" />
                             <TextField
                                 id="outlined-select-department"
+                                onChange={onPhongBanChange}
+                                value={phongban}
                                 select
-                                label="Phòng ban"
-                                defaultValue="IT"
-                            // helperText="Please select your department"
-                            >
-                                {department.map((option) => (
-                                    <MenuItem key={option.value} value={option.value}>
-                                        {option.value}
-                                    </MenuItem>
-                                ))}
+                                label="Phòng ban">
+                                {phongbanSelect}
                             </TextField>
-                            <TextField id="outlined-email" label="Email" variant="outlined" />
                             <TextField
                                 id="email"
-                                label="email"
-                                variant="outlined"
-                            />
-                            <TextField id="sdtnhanvien" label="Số điện thoại" variant="outlined" />
-
-                            <TextField id="diachi" label="Địa chỉ" variant="outlined" />
+                                onChange={onEmailChange}
+                                value={email}
+                                label="Email"
+                                variant="outlined" />
+                            <TextField
+                                id="sdtnhanvien"
+                                onChange={onSdtNhanVienChange}
+                                value={sdtnhanvien}
+                                label="Số điện thoại"
+                                variant="outlined" />
+                            <TextField
+                                id="diachi"
+                                onChange={onDiaChiChange}
+                                value={diachi}
+                                label="Địa chỉ"
+                                variant="outlined" />
                             <LocalizationProvider dateAdapter={AdapterDayjs} components={['DateTimePicker']}>
-                                <DateTimePicker label="Ngày vào làm" />
+                                <DateTimePicker
+                                    format="DD-MM-YYYY"
+                                    onChange={onNgayVaoLamChange}
+                                    value={ngayvaolam}
+                                    label="Ngày vào làm" />
                             </LocalizationProvider>
                         </div>
                     </Box>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>HỦY</Button>
-                    <Button onClick={handleOpenInner} autoFocus>
+                    <Button onClick={onSubmitNhanVien} autoFocus>
                         XÁC NHẬN
                     </Button>
                 </DialogActions>

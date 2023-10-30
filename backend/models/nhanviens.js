@@ -4,7 +4,7 @@ const Phongban = require('./phongbans')
 const nhanvienSchema = new mongoose.Schema({
     tennhanvien: {
         type: String,
-        required: true
+        required: false
     },
     phongban: {
         type: mongoose.Schema.Types.ObjectId,
@@ -15,8 +15,8 @@ const nhanvienSchema = new mongoose.Schema({
         required: false
     },
     ngayvaolam: {
-        type: Date,
-        required: true,
+        type: String,
+        required: false,
     },
     sdtnhanvien: {
         type: Number,

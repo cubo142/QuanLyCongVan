@@ -32,6 +32,7 @@ const QLThemNhanVien = (props) => {
 
     //Lấy props
     const phongbanData = props.phongbanData;
+    const nhanvienData = props.nhanvienData
 
     //Khai báo các state
     const [tennhanvien, setTennhanvien] = useState("")
@@ -75,7 +76,7 @@ const QLThemNhanVien = (props) => {
 
     //Phương thức thêm nhân viên
     const onAddNhanVien = async (nhanvien) => {
-        await addNhanVien.mutateAsync({ nhanvien })
+        await addNhanVien.mutateAsync(nhanvien)
     }
 
     const onSubmitNhanVien = () => {

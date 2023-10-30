@@ -36,10 +36,10 @@ const updatePhongban = async (req, res) => {
         }
         else {
             //Body nhận data truyền vào
-            res.phongban.tenphongban = req.body.tenphongban
-            res.phongban.truongphong = req.body.truongphong
-            res.phongban.sdtphongban = req.body.sdtphongban
-            const updatePhongban = await res.phongban.save()
+            phongban.tenphongban = req.body.tenphongban
+            phongban.truongphong = req.body.truongphong
+            phongban.sdtphongban = req.body.sdtphongban
+            const updatePhongban = await phongban.save()
             res.json(updatePhongban)
         }
 
@@ -57,7 +57,7 @@ const deletePhongban = async (req, res) => {
             return res.status(404).json({ message: 'Không tìm thấy phòng ban' })
         }
         else {
-            await res.phongban.deleteOne()
+            await phongban.deleteOne()
             res.json({ messasge: 'Xóa thành công' })
         }
     } catch (err) {

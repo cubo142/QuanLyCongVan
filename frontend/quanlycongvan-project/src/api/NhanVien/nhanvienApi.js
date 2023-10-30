@@ -14,7 +14,7 @@ export const getNhanVienById = async (id) => {
     return response.data;
 }
 
-export const addNhanVien = async ({ nhanvien }) => {
+export const addNhanVien = async (nhanvien) => {
     return await nhanvienApi.post(`/nhanviens/`, nhanvien)
 }
 

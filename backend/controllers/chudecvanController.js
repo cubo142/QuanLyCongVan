@@ -34,8 +34,8 @@ const updateChudecvan = async (req, res) => {
         }
         else {
             //Body nhận data truyền vào
-            res.chudecvan.chudecvan = req.body.chudecvan
-            const updateChudecvan = await res.chudecvan.save()
+            chudecvan.chudecvan = req.body.chudecvan
+            const updateChudecvan = await chudecvan.save()
             res.json(updateChudecvan)
         }
 
@@ -53,7 +53,7 @@ const deleteChudecvan = async (req, res) => {
             return res.status(404).json({ message: 'Không tìm thấy chủ đề công văn' })
         }
         else {
-            await res.chudecvan.deleteOne()
+            await chudecvan.deleteOne()
             res.json({ messasge: 'Xóa thành công' })
         }
     } catch (err) {

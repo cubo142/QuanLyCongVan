@@ -41,14 +41,14 @@ const updateNhanvien = async (req, res) => {
         }
         else {
             //Body nhận data truyền vào
-            res.nhanvien.tennhanvien = req.body.tennhanvien
-            res.nhanvien.phongban = req.body.phongban
-            res.nhanvien.email = req.body.email
-            res.nhanvien.ngayvaolam = req.body.ngayvaolam
-            res.nhanvien.sdtnhanvien = req.body.sdtnhanvien
-            res.nhanvien.diachi = req.body.diachi
-            
-            const updateNhanvien = await res.nhanvien.save()
+            nhanvien.tennhanvien = req.body.tennhanvien
+            nhanvien.phongban = req.body.phongban
+            nhanvien.email = req.body.email
+            nhanvien.ngayvaolam = req.body.ngayvaolam
+            nhanvien.sdtnhanvien = req.body.sdtnhanvien
+            nhanvien.diachi = req.body.diachi
+
+            const updateNhanvien = await nhanvien.save()
             res.json(updateNhanvien)
         }
 
@@ -66,7 +66,7 @@ const deleteNhanvien = async (req, res) => {
             return res.status(404).json({ message: 'Không tìm thấy nhân viên' })
         }
         else {
-            await res.nhanvien.deleteOne()
+            await nhanvien.deleteOne()
             res.json({ messasge: 'Xóa thành công' })
         }
     } catch (err) {

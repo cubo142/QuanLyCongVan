@@ -50,22 +50,22 @@ const updateCongvan = async (req, res) => {
         }
         else {
             //Body nhận data truyền vào
-            res.congvan.kyhieucvan = req.body.kyhieucvan
-            res.congvan.ngaybanhanh = req.body.ngaybanhanh
-            res.congvan.ngayhethieuluc = req.body.ngayhethieuluc
-            res.congvan.nguoinhan = req.body.nguoinhan
-            res.congvan.trichyeu = req.body.trichyeu
-            res.congvan.noidung = req.body.noidung
-            res.congvan.file = req.body.file
-            res.congvan.trangthai = req.body.trangthai
-            res.congvan.ngaygui = req.body.ngaygui
-            res.congvan.coquanbanhanh = req.body.coquanbanhanh
-            res.congvan.noiluubanchinh = req.body.noiluubanchinh
-            res.congvan.loaicvan = req.body.loaicvan
-            res.congvan.chudecvan = req.body.chudecvan
-            res.congvan.phongban = req.body.phongban
-            res.congvan.linhvuc = req.body.linhvuc
-            const updateCongvan = await res.congvan.save()
+            congvan.kyhieucvan = req.body.kyhieucvan
+            congvan.ngaybanhanh = req.body.ngaybanhanh
+            congvan.ngayhethieuluc = req.body.ngayhethieuluc
+            congvan.nguoinhan = req.body.nguoinhan
+            congvan.trichyeu = req.body.trichyeu
+            congvan.noidung = req.body.noidung
+            congvan.file = req.body.file
+            congvan.trangthai = req.body.trangthai
+            congvan.ngaygui = req.body.ngaygui
+            congvan.coquanbanhanh = req.body.coquanbanhanh
+            congvan.noiluubanchinh = req.body.noiluubanchinh
+            congvan.loaicvan = req.body.loaicvan
+            congvan.chudecvan = req.body.chudecvan
+            congvan.phongban = req.body.phongban
+            congvan.linhvuc = req.body.linhvuc
+            const updateCongvan = await congvan.save()
             res.json(updateCongvan)
         }
 
@@ -83,7 +83,7 @@ const deleteCongvan = async (req, res) => {
             return res.status(404).json({ message: 'Congvan not found' })
         }
         else {
-            await res.congvan.deleteOne()
+            await congvan.deleteOne()
             res.json({ messasge: 'Delete successful' })
         }
     } catch (err) {
