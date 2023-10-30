@@ -14,7 +14,7 @@ export const getLoaiCVanById = async (id) => {
     return response.data;
 }
 
-export const addLoaiCVan = async ({ loaicvan }) => {
+export const addLoaiCVan = async (loaicvan) => {
     return await loaicvanApi.post(`/loaicvans/`, loaicvan)
 }
 

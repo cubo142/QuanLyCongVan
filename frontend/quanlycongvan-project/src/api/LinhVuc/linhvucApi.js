@@ -14,7 +14,7 @@ export const getLinhVucById = async (id) => {
     return response.data;
 }
 
-export const addLinhVuc = async ({ linhvuc }) => {
+export const addLinhVuc = async ( linhvuc ) => {
     return await linhvucApi.post(`/linhvucs/`, linhvuc)
 }
 

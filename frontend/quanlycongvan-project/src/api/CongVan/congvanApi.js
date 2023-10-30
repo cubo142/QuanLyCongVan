@@ -29,7 +29,7 @@ export const getCongVanById = async (id) => {
     return response.data;
 }
 
-export const addCongVan = async ({ congvan }) => {
+export const addCongVan = async ( congvan ) => {
     return await congvanApi.post(`/congvans/`, congvan)
 }
 

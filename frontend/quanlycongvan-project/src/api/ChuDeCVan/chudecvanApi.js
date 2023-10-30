@@ -14,7 +14,7 @@ export const getChuDeCVanById = async (id) => {
     return response.data;
 }
 
-export const addChuDeCVan = async ({ chudecvan }) => {
+export const addChuDeCVan = async ( chudecvan ) => {
     return await chudecvanApi.post(`/chudecvans/`, chudecvan)
 }
 
