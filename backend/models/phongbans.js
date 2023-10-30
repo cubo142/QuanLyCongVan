@@ -7,7 +7,7 @@ const phongbanSchema = new mongoose.Schema({
     },
     truongphong: {
         type: String,
-        required: true
+        required: false
     },
     sdtphongban: {
         type: Number,
