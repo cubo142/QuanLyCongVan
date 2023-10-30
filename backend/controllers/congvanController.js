@@ -14,10 +14,6 @@ const getAllCongvans = async (req, res) => {
 //Create 1
 const createCongvan = async (req, res) => {
     const congvan = new Congvan({
-        loaicvan: req.body.loaicvan,
-        chudecvan: req.body.chudecvan,
-        phongban: req.body.phongban,
-        linhvuc: req.body.linhvuc,
         kyhieucvan: req.body.kyhieucvan,
         ngaybanhanh: req.body.ngaybanhanh,
         ngayhethieuluc: req.body.ngayhethieuluc,
@@ -27,9 +23,12 @@ const createCongvan = async (req, res) => {
         file: req.body.file,
         trangthai: req.body.trangthai,
         ngaygui: req.body.ngaygui,
-        file: req.body.file,
+        coquanbanhanh: req.body.coquanbanhanh,
+        noiluubanchinh: req.body.noiluubanchinh,
         loaicvan: req.body.loaicvan,
-        
+        chudecvan: req.body.chudecvan,
+        phongban: req.body.phongban,
+        linhvuc: req.body.linhvuc,
     })
     try {
         const newCongvan = await congvan.save();
@@ -60,6 +59,12 @@ const updateCongvan = async (req, res) => {
             res.congvan.file = req.body.file
             res.congvan.trangthai = req.body.trangthai
             res.congvan.ngaygui = req.body.ngaygui
+            res.congvan.coquanbanhanh = req.body.coquanbanhanh
+            res.congvan.noiluubanchinh = req.body.noiluubanchinh
+            res.congvan.loaicvan = req.body.loaicvan
+            res.congvan.chudecvan = req.body.chudecvan
+            res.congvan.phongban = req.body.phongban
+            res.congvan.linhvuc = req.body.linhvuc
             const updateCongvan = await res.congvan.save()
             res.json(updateCongvan)
         }

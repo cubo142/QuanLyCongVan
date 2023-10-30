@@ -42,6 +42,7 @@ const updateNhanvien = async (req, res) => {
         else {
             //Body nhận data truyền vào
             res.nhanvien.tennhanvien = req.body.tennhanvien
+            res.nhanvien.phongban = req.body.phongban
             res.nhanvien.email = req.body.email
             res.nhanvien.ngayvaolam = req.body.ngayvaolam
             res.nhanvien.sdtnhanvien = req.body.sdtnhanvien

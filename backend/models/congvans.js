@@ -31,10 +31,6 @@ const congvanSchema = new mongoose.Schema({
         type: String,
         required: false
     },
-    file: {
-        type: Buffer,
-        required: false
-    },
     trangthai: {
         type: Number,
         required: false

@@ -1,28 +1,18 @@
 import React, { useState } from 'react';
 import { Box, Button, Dialog, DialogActions, DialogTitle, DialogContent, TextField, MenuItem } from '@mui/material';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import IconButton from '@mui/material/IconButton';
+import { FaPen } from 'react-icons/fa';
 
 
 
-const QLThemNhanVien = () => {
+const QLCapNhatChuDeCVan = () => {
 
-    const department = [
+    const manager = [
         {
-            value: 'Sales',
+            value: 'Hành Chính',
         },
         {
-            value: 'Marketing',
-        },
-        {
-            value: 'Finance',
-        },
-        {
-            value: 'HR',
-        },
-        {
-            value: 'IT',
+            value: 'Giáo Dục',
         },
     ];
 
@@ -45,15 +35,15 @@ const QLThemNhanVien = () => {
 
     return (
         <Box>
-            <Button variant="outlined" onClick={handleOpen} size='large'>
-                Thêm
-            </Button>
+            <IconButton onClick={handleOpen} >
+                <FaPen fontSize="medium" />
+            </IconButton>
             <Dialog
                 open={open}
                 onClose={handleClose}
             >
                 <DialogTitle>
-                    Thêm nhân viên
+                    Cập nhật chủ đề công văn
                 </DialogTitle>
                 <DialogContent>
                     <Box
@@ -65,35 +55,19 @@ const QLThemNhanVien = () => {
                         autoComplete="off"
                     >
                         <div>
-                            <TextField id="outlined-last-name" label="Họ" variant="outlined" />
-                            <TextField id="outlined-first-name" label="Tên" variant="outlined" />
                             <TextField
-                                id="outlined-select-department"
+                                id="outlined-select-topic"
                                 select
-                                label="Bộ phận"
-                                defaultValue="IT"
-                            // helperText="Please select your department"
+                                label="Chủ đề công văn"
+                                defaultValue="Hành Chính"
+                            // helperText="Please select manager"
                             >
-                                {department.map((option) => (
+                                {manager.map((option) => (
                                     <MenuItem key={option.value} value={option.value}>
                                         {option.value}
                                     </MenuItem>
                                 ))}
                             </TextField>
-                            <TextField id="outlined-email" label="Email" variant="outlined" />
-                            <TextField
-                                id="outlined-password-input"
-                                label="Mật khẩu"
-                                variant="outlined"
-                                type="password"
-                                autoComplete="current-password"
-                            />
-                            <TextField id="outlined-phone" label="Số điện thoại" variant="outlined" />
-
-                            <TextField id="outlined-address" label="Địa chỉ" variant="outlined" />
-                            <LocalizationProvider dateAdapter={AdapterDayjs} components={['DateTimePicker']}>
-                                <DateTimePicker label="Ngày vào làm" />
-                            </LocalizationProvider>
                         </div>
                     </Box>
                 </DialogContent>
@@ -109,7 +83,7 @@ const QLThemNhanVien = () => {
                 onClose={handleClose}
             >
                 <DialogTitle>
-                    Thêm nhân viên thành công / thất bại
+                    Cập nhật chủ đề công văn thành công / thất bại
                 </DialogTitle>
                 <DialogActions>
                     <Button onClick={handleClose} autoFocus>
@@ -121,4 +95,4 @@ const QLThemNhanVien = () => {
     );
 };
 
-export default QLThemNhanVien;
+export default QLCapNhatChuDeCVan;

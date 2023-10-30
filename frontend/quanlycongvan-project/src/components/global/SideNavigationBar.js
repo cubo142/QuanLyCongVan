@@ -16,7 +16,7 @@ const SideNavigationBar = () => {
                     <SubMenu icon={<FiCheckSquare />} label="Quản lý">
                         <MenuItem component={<Link to="/quanly" />}>Quản lý nhân viên</MenuItem>
                         <MenuItem component={<Link to="/phongban" />}>Quản lý phòng ban</MenuItem>
-                        <MenuItem>Quản lý chủ đề</MenuItem>
+                        <MenuItem component={<Link to="/chudecvan" />}>Quản lý chủ đề công văn</MenuItem>
                     </SubMenu>
 
                     {/* Công văn*/}
