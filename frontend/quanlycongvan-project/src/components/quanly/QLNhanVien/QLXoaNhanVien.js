@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import { Box, Button, Dialog, DialogActions, DialogTitle } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import { FaTrash } from 'react-icons/fa';
+import { useDeleteNhanVien } from '../../../api/NhanVien/useNhanVien';
 
 
 
-const QLXoaNhanVien = ({ onDeleteNhanVien, nhanvienID }) => {
-
+const QLXoaNhanVien = ({ nhanvienID }) => {
+    const deleteNhanVien = useDeleteNhanVien();
     const [open, setOpen] = useState(false);
 
     const handleOpen = () => {
@@ -20,6 +21,10 @@ const QLXoaNhanVien = ({ onDeleteNhanVien, nhanvienID }) => {
     const handleDelete = () => {
         onDeleteNhanVien(nhanvienID); // Gọi hàm xóa dữ liệu với nhanvienID
         handleClose(); // Sau khi xóa, đóng hộp thoại
+    }
+
+    const onDeleteNhanVien = async (id) => {
+        await deleteNhanVien.mutateAsync(id);
     }
 
     return (

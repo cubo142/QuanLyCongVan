@@ -10,10 +10,10 @@ const phongbanSchema = new mongoose.Schema({
         required: false
     },
     sdtphongban: {
-        type: Number,
+        type: String,
         required: false
     }
 })
 
 //mongoose.model("tên model",schema)
-module.exports = mongoose.model('Phongban',phongbanSchema);
+module.exports = mongoose.model('Phongban', phongbanSchema);

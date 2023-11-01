@@ -14,7 +14,7 @@ export const getPhongBanById = async (id) => {
     return response.data;
 }
 
-export const addPhongBan = async ({ phongban }) => {
+export const addPhongBan = async ( phongban ) => {
     return await phongbanApi.post(`/phongbans/`, phongban)
 }
 

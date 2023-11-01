@@ -9,43 +9,15 @@ import { useUpdateNhanVien } from '../../../api/NhanVien/useNhanVien';
 import dayjs from 'dayjs';
 
 const QLCapNhatNhanVien = (props) => {
-
-    const [open, setOpen] = useState(false);
-
-    const handleOpen = () => {
-        setOpen(true)
-    }
-
-    const handleClose = () => {
-        setOpen(false)
-        setOpenInner(false)
-        // setTennhanvien(nhanvienDataById.tennhanvien)
-        // setPhongban(nhanvienDataById.phongban._id)
-        // setEmail(nhanvienDataById.email)
-        // setNgayvaolam(dayjs(nhanvienDataById.ngayvaolam))
-        // setSdtnhanvien(nhanvienDataById.sdtnhanvien)
-        // setDiachi(nhanvienDataById.diachi)
-    }
-
-    const [openInner, setOpenInner] = useState(false);
-
-    const handleOpenInner = () => {
-        setOpenInner(true)
-    }
-
-    //Hooks cần sử dụng được tạo với react-query
-    const updateNhanVien = useUpdateNhanVien();
-
-
-    //Lấy props
+    //Lấy data
     const phongbanData = props.phongbanData;
     const nhanvienID = props.nhanvienID;
     const nhanvienData = props.nhanvienData;
-
-    //Lấy data nhân viên dựa trên id
     const nhanvienDataById = nhanvienData.find(item => item._id === nhanvienID)
 
-    //Khai báo các state
+    //Các State
+    const [open, setOpen] = useState(false);
+    const [openInner, setOpenInner] = useState(false);
     const [tennhanvien, setTennhanvien] = useState(nhanvienDataById.tennhanvien)
     const [phongban, setPhongban] = useState(nhanvienDataById.phongban._id)
     const [email, setEmail] = useState(nhanvienDataById.email)
@@ -54,6 +26,17 @@ const QLCapNhatNhanVien = (props) => {
     const [diachi, setDiachi] = useState(nhanvienDataById.diachi)
     const [error, setError] = useState("")
 
+    //Các hook react-query
+    const updateNhanVien = useUpdateNhanVien();
+
+    //Các function
+    const handleOpen = () => {
+        setOpen(true)
+    }
+    const handleClose = () => {
+        setOpen(false)
+        setOpenInner(false)
+    }
     //MenuItem cho PhongBan Select
     let phongbanSelect = null;
     if (phongbanData) {
@@ -63,8 +46,7 @@ const QLCapNhatNhanVien = (props) => {
             </MenuItem>
         ))
     }
-
-    //các phương thức setState
+    //Setstate
     const onTenNhanVienChange = (e) => {
         setTennhanvien(e.target.value);
     }
@@ -84,10 +66,9 @@ const QLCapNhatNhanVien = (props) => {
         setDiachi(e.target.value);
     }
 
-
-    //Phương thức thêm nhân viên
+    //Thêm nhân viên
     const onUpdateNhanVien = async (nhanvien) => {
-        await updateNhanVien.mutateAsync(nhanvien )
+        await updateNhanVien.mutateAsync(nhanvien)
     }
 
     const onSubmitNhanVien = () => {

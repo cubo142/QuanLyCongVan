@@ -19,7 +19,7 @@ const nhanvienSchema = new mongoose.Schema({
         required: false,
     },
     sdtnhanvien: {
-        type: Number,
+        type: String,
         required: false
     },
     diachi: {

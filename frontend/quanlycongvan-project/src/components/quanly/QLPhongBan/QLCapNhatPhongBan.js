@@ -1,36 +1,63 @@
 import React, { useState } from 'react';
-import { Box, Button, Dialog, DialogActions, DialogTitle, DialogContent, TextField, MenuItem } from '@mui/material';
+import { Box, Button, Dialog, DialogActions, DialogTitle, DialogContent, TextField } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import { FaPen } from 'react-icons/fa';
+import { useUpdatePhongBan } from '../../../api/PhongBan/usePhongBan';
 
 
 
-const QLCapNhatPhongBan = () => {
+const QLCapNhatPhongBan = ({ phongbanData, phongbanID }) => {
 
-    const manager = [
-        {
-            value: 'Lương Đình Thông',
-        },
-        {
-            value: 'Đỗ Đức Minh',
-        },
-    ];
+    //Lấy props
+    const nhanvienDataById = phongbanData.find(item => item._id === phongbanID)
 
+    //State
+    const [openInner, setOpenInner] = useState(false);
     const [open, setOpen] = useState(false);
+    const [tenphongban, setTenphongban] = useState(nhanvienDataById.tenphongban)
+    const [truongphong, setTruongphong] = useState(nhanvienDataById.truongphong)
+    const [sdtphongban, setSdtphongban] = useState(nhanvienDataById.sdtphongban)
+    const [error, setError] = useState("")
 
+    //Hooks được tạo với react-query
+    const updatePhongBan = useUpdatePhongBan();
+
+    //Function
     const handleOpen = () => {
         setOpen(true)
     }
-
     const handleClose = () => {
         setOpen(false)
         setOpenInner(false)
     }
 
-    const [openInner, setOpenInner] = useState(false);
+    const onTenPhongBanChange = (e) => {
+        setTenphongban(e.target.value);
+    }
+    const onTruongPhongChange = (e) => {
+        setTruongphong(e.target.value);
+    }
+    const onSdtPhongBanChange = (e) => {
+        setSdtphongban(e.target.value);
+    }
 
-    const handleOpenInner = () => {
-        setOpenInner(true)
+    //Thêm nhân viên
+    const onUpdatePhongBan = async (phongban) => {
+        await updatePhongBan.mutateAsync(phongban)
+    }
+
+    const onSubmitPhongBan = () => {
+        if (!tenphongban || !truongphong || !sdtphongban) {
+            setError('Please fill in all required fields');
+        }
+        setError('');
+        onUpdatePhongBan({
+            tenphongban,
+            truongphong,
+            sdtphongban,
+            phongbanID
+        })
+        handleClose()
     }
 
     return (
@@ -52,31 +79,34 @@ const QLCapNhatPhongBan = () => {
                             '& .MuiTextField-root': { m: 1, width: '30ch' },
                         }}
                         noValidate
-                        autoComplete="off"
-                    >
+                        autoComplete="off">
                         <div>
-                            <TextField id="outlined-department" label="Tên phòng ban" variant="outlined" />
+                            {error}
                             <TextField
-                                id="outlined-select-manager"
-                                select
-                                label="Trưởng phòng"
-                                defaultValue="Lương Đình Thông"
-                            // helperText="Please select manager"
-                            >
-                                {manager.map((option) => (
-                                    <MenuItem key={option.value} value={option.value}>
-                                        {option.value}
-                                    </MenuItem>
-                                ))}
-                            </TextField>
-                            <TextField id="outlined-phone" label="Số điện thoại" variant="outlined" />
+                                id="tennhanvien"
+                                onChange={onTenPhongBanChange}
+                                value={tenphongban}
+                                label="Tên Phòng Ban"
+                                variant="outlined" />
+                            <TextField
+                                id="truongphong"
+                                onChange={onTruongPhongChange}
+                                value={truongphong}
+                                label="Trưởng Phòng"
+                                variant="outlined" />
+                            <TextField
+                                id="sdtphongban"
+                                onChange={onSdtPhongBanChange}
+                                value={sdtphongban}
+                                label="SDT Phòng ban"
+                                variant="outlined" />
                         </div>
                     </Box>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose}>Không đồng ý</Button>
-                    <Button onClick={handleOpenInner} autoFocus>
-                        Đồng ý
+                    <Button onClick={handleClose}>HỦY</Button>
+                    <Button onClick={onSubmitPhongBan} autoFocus>
+                        XÁC NHẬN
                     </Button>
                 </DialogActions>
             </Dialog>

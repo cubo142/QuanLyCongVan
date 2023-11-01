@@ -9,32 +9,9 @@ import { useAddNhanVien } from '../../../api/NhanVien/useNhanVien';
 
 const QLThemNhanVien = (props) => {
 
-    const [open, setOpen] = useState(false);
-
-    const handleOpen = () => {
-        setOpen(true)
-    }
-
-    const handleClose = () => {
-        setOpen(false)
-        setOpenInner(false)
-    }
-
+    //State
     const [openInner, setOpenInner] = useState(false);
-
-    const handleOpenInner = () => {
-        setOpenInner(true)
-    }
-
-    //Hooks cần sử dụng được tạo với react-query
-    const addNhanVien = useAddNhanVien();
-
-
-    //Lấy props
-    const phongbanData = props.phongbanData;
-    const nhanvienData = props.nhanvienData
-
-    //Khai báo các state
+    const [open, setOpen] = useState(false);
     const [tennhanvien, setTennhanvien] = useState("")
     const [phongban, setPhongban] = useState("")
     const [email, setEmail] = useState("")
@@ -43,6 +20,13 @@ const QLThemNhanVien = (props) => {
     const [diachi, setDiachi] = useState("")
     const [error, setError] = useState("")
 
+    //Lấy props
+    const phongbanData = props.phongbanData;
+
+    //Hooks được tạo với react-query
+    const addNhanVien = useAddNhanVien();
+
+    //Function
     //MenuItem cho PhongBan Select
     let phongbanSelect = null;
     if (phongbanData) {
@@ -53,7 +37,14 @@ const QLThemNhanVien = (props) => {
         ))
     }
 
-    //các phương thức setState
+    const handleOpen = () => {
+        setOpen(true)
+    }
+    const handleClose = () => {
+        setOpen(false)
+        setOpenInner(false)
+    }
+
     const onTenNhanVienChange = (e) => {
         setTennhanvien(e.target.value);
     }
@@ -74,7 +65,7 @@ const QLThemNhanVien = (props) => {
     }
 
 
-    //Phương thức thêm nhân viên
+    //Thêm nhân viên
     const onAddNhanVien = async (nhanvien) => {
         await addNhanVien.mutateAsync(nhanvien)
     }
