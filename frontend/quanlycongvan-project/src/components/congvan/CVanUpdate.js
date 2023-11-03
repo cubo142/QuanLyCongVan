@@ -170,7 +170,7 @@ const CVanUpdate = () => {
                 <DialogActions>
                     <Button onClick={handleClose}>HỦY</Button>
                     <Button onClick={handleOpenInner} autoFocus>
-                      XÁC NHẬN
+                        XÁC NHẬN
                     </Button>
                 </DialogActions>
             </Dialog>

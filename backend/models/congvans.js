@@ -1,6 +1,5 @@
 const mongoose = require('mongoose')
 const Loaicvan = require('./loaicvans')
-const Chudecvan = require('./chudecvans')
 const Phongban = require('./phongbans')
 const Linhvuc = require('./linhvucs')
 
@@ -8,16 +7,6 @@ const congvanSchema = new mongoose.Schema({
     kyhieucvan: {
         type: String,
         required: false
-    },
-    ngaybanhanh: {
-        type: Date,
-        required: false,
-        default: Date.now
-    },
-    ngayhethieuluc: {
-        type: Date,
-        required: false,
-        default: Date.now
     },
     nguoinhan: {
         type: String,
@@ -44,21 +33,29 @@ const congvanSchema = new mongoose.Schema({
         type: Buffer,
         required: false
     },
+    filename: {
+        type: String,
+        required: false
+    },
+    chudecvan: {
+        type: String,
+        required: false
+    },
     coquanbanhanh: {
         type: String,
         required: false
     },
     noiluubanchinh: {
         type: String,
-        require: false
+        required: false
+    },
+    kieucvan: {
+        type: String,
+        required: false
     },
     loaicvan: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Loaicvan'
-    },
-    chudecvan: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Chudecvan'
+        type: String,
+        required: false
     },
     phongban: {
         type: mongoose.Schema.Types.ObjectId,

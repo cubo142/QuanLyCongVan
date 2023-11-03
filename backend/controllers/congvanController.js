@@ -1,4 +1,5 @@
 const Congvan = require('../models/congvans')
+const { mwUploadFile } = require('../middlewares/mwUploadFile');
 
 //Get All
 const getAllCongvans = async (req, res) => {
@@ -15,12 +16,11 @@ const getAllCongvans = async (req, res) => {
 const createCongvan = async (req, res) => {
     const congvan = new Congvan({
         kyhieucvan: req.body.kyhieucvan,
-        ngaybanhanh: req.body.ngaybanhanh,
-        ngayhethieuluc: req.body.ngayhethieuluc,
         nguoinhan: req.body.nguoinhan,
         trichyeu: req.body.trichyeu,
         noidung: req.body.noidung,
-        file: req.body.file,
+        file: req.file.buffer,
+        filename: req.file.originalname,
         trangthai: req.body.trangthai,
         ngaygui: req.body.ngaygui,
         coquanbanhanh: req.body.coquanbanhanh,
@@ -29,6 +29,7 @@ const createCongvan = async (req, res) => {
         chudecvan: req.body.chudecvan,
         phongban: req.body.phongban,
         linhvuc: req.body.linhvuc,
+        kieucvan:req.body.kieucvan
     })
     try {
         const newCongvan = await congvan.save();
@@ -39,7 +40,8 @@ const createCongvan = async (req, res) => {
     } catch (err) {
         res.status(400).json({ message: err.message })
     }
-}
+};
+
 
 //Update 1
 const updateCongvan = async (req, res) => {
@@ -51,8 +53,6 @@ const updateCongvan = async (req, res) => {
         else {
             //Body nhận data truyền vào
             congvan.kyhieucvan = req.body.kyhieucvan
-            congvan.ngaybanhanh = req.body.ngaybanhanh
-            congvan.ngayhethieuluc = req.body.ngayhethieuluc
             congvan.nguoinhan = req.body.nguoinhan
             congvan.trichyeu = req.body.trichyeu
             congvan.noidung = req.body.noidung
@@ -65,6 +65,7 @@ const updateCongvan = async (req, res) => {
             congvan.chudecvan = req.body.chudecvan
             congvan.phongban = req.body.phongban
             congvan.linhvuc = req.body.linhvuc
+            congvan.kieucvan = req.body.kieucvan
             const updateCongvan = await congvan.save()
             res.json(updateCongvan)
         }

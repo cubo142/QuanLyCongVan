@@ -1,20 +1,18 @@
 import React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
+import CVanThem from '../CVanThem';
+import CVanXoa from '../CVanXoa';
+import CVanUpdate from '../CVanUpdate';
 
-
-const CVanDi = (props) => {
-
-    const CVanThemButton = props.CVanThem;
-    const CVanXoaButton = props.CVanXoa;
-    const CVanUpdateButton = props.CVanUpdate;
+const CVanDi = () => {
 
     //Hiển thị option cho list
     const renderButton = (params) => {
         return (
             <div style={{ display: "flex" }}>
-                <CVanUpdateButton />
+                <CVanUpdate />
                 <div className='space-width' />
-                <CVanXoaButton />
+                <CVanXoa />
             </div>
         )
     }
@@ -54,17 +52,18 @@ const CVanDi = (props) => {
         { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
     ];
 
+
     return (
         <>
-            <div style={{ float: "right" }}><CVanThemButton /></div>
-            <h5>Công văn đi</h5>
+            <div style={{ float: "right" }}><CVanThem kieucvandi={"Công văn đi"} /></div>
+            <h5>Công văn đến</h5>
             <div style={{ height: '100%', width: '100%' }}>
                 <DataGrid
                     rows={rows}
                     columns={columns}
                     initialState={{
                         pagination: {
-                            paginationModel: { page: 0, pageSize: 3 },
+                            paginationModel: { page: 0, pageSize: 5 },
                         },
                     }}
                     pageSizeOptions={[5, 10]}
