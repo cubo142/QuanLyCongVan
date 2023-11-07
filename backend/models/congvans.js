@@ -54,8 +54,8 @@ const congvanSchema = new mongoose.Schema({
         required: false
     },
     loaicvan: {
-        type: String,
-        required: false
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Loaicvan'
     },
     phongban: {
         type: mongoose.Schema.Types.ObjectId,

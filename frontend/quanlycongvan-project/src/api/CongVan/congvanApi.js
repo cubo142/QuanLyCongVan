@@ -29,12 +29,20 @@ export const getCongVanById = async (id) => {
     return response.data;
 }
 
-export const addCongVan = async ( congvan ) => {
-    return await congvanApi.post(`/congvans/`, congvan)
+export const addCongVan = async (congvan) => {
+    const formData = new FormData();
+    for (const key in congvan) {
+        formData.append(key, congvan[key]);
+    }
+    return await congvanApi.post(`/congvans/`, formData)
 }
 
 export const updateCongVan = async (congvan) => {
-    return await congvanApi.patch(`/congvans/${congvan.congvanID}`, congvan)
+    const formData = new FormData();
+    for (const key in congvan) {
+        formData.append(key, congvan[key]);
+    }
+    return await congvanApi.patch(`/congvans/${congvan.congvanID}`, formData)
 }
 
 export const deleteCongVan = async (id) => {

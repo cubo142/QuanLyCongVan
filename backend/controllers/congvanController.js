@@ -29,7 +29,7 @@ const createCongvan = async (req, res) => {
         chudecvan: req.body.chudecvan,
         phongban: req.body.phongban,
         linhvuc: req.body.linhvuc,
-        kieucvan:req.body.kieucvan
+        kieucvan: req.body.kieucvan
     })
     try {
         const newCongvan = await congvan.save();
@@ -57,6 +57,7 @@ const updateCongvan = async (req, res) => {
             congvan.trichyeu = req.body.trichyeu
             congvan.noidung = req.body.noidung
             congvan.file = req.body.file
+            congvan.filename = req.file.originalname
             congvan.trangthai = req.body.trangthai
             congvan.ngaygui = req.body.ngaygui
             congvan.coquanbanhanh = req.body.coquanbanhanh
@@ -66,6 +67,7 @@ const updateCongvan = async (req, res) => {
             congvan.phongban = req.body.phongban
             congvan.linhvuc = req.body.linhvuc
             congvan.kieucvan = req.body.kieucvan
+
             const updateCongvan = await congvan.save()
             res.json(updateCongvan)
         }

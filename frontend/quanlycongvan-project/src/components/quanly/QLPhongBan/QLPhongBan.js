@@ -10,9 +10,17 @@ import { useGetPhongBan } from '../../../api/PhongBan/usePhongBan';
 
 
 const QLPhongBan = () => {
+    const pageStyle = {
+        display: 'flex',
+        flexDirection: 'column',
+        position: "relative",
+        margin: "auto",
+        width: "100%"
+    }
+    
     //Lấy data
-
     const { data: phongbanData, isLoading, error } = useGetPhongBan();
+
     if (isLoading) {
         return "Cò lỗi gì đó đã xảy ra"
     }
@@ -21,13 +29,7 @@ const QLPhongBan = () => {
         return <div>{error.message}</div>;
     }
 
-    const pageStyle = {
-        display: 'flex',
-        flexDirection: 'column',
-        position: "relative",
-        margin: "auto",
-        width: "100%"
-    }
+
 
     //Hiển thị option cho list
     const renderButton = (params) => {

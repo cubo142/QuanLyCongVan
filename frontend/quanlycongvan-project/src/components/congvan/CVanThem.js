@@ -1,8 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Button, Dialog, DialogActions, DialogTitle, DialogContent, TextField, MenuItem } from '@mui/material';
 import { DateTimePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { useAddCongVan } from '../../api/CongVan/useCongVan';
+import { useGetPhongBan } from '../../api/PhongBan/usePhongBan';
+import { useGetLoaiCVan } from '../../api/LoaiCVan/useLoaiCVan';
+import { useGetLinhVuc } from '../../api/LinhVuc/useLinhVuc';
 const CVanThem = ({ kieucvanden, kieucvandi, kieucvannoibo }) => {
 
     //styles
@@ -10,20 +13,23 @@ const CVanThem = ({ kieucvanden, kieucvandi, kieucvannoibo }) => {
     //State
     const [openInner, setOpenInner] = useState(false);
     const [open, setOpen] = useState(false);
+    const [phongban, setPhongBan] = useState("");
     const [ngaygui, setNgayGui] = useState("");
     const [nguoinhan, setNguoiNhan] = useState("");
     const [trichyeu, setTrichYeu] = useState("");
     const [noidung, setNoiDung] = useState("");
     const [file, setFile] = useState(null);
+    const [linhvuc, setLinhVuc] = useState("")
     const [trangthai, setTrangThai] = useState(1);
+    const [kyhieucvan, setKyHieuCVan] = useState("");
     const [coquanbanhanh, setCoQuanBanHanh] = useState("");
     const [noiluubanchinh, setNoiLuuBanChinh] = useState("");
     const [chudecvan, setChuDeCVan] = useState("");
-    const [loaicvan, setLoaiCVan] = useState(0);
+    const [loaicvan, setLoaiCVan] = useState("");
     const [kieucvanselect, setKieuCVanSelect] = useState('');
     const [error, setError] = useState("");
     const [kieucvan, setKieuCVan] = useState("");
-    const fileInputRef = useRef(null);
+
     useEffect(() => {
         if (kieucvanden) {
             setKieuCVanSelect('CVANDEN');
@@ -37,8 +43,11 @@ const CVanThem = ({ kieucvanden, kieucvandi, kieucvannoibo }) => {
         }
     }, [kieucvanden, kieucvannoibo, kieucvandi]);
 
-    //Hooks được tạo với react-query
+    //Hooks
     const addCongVan = useAddCongVan();
+    const { data: phongbanData } = useGetPhongBan();
+    const { data: loaicvanData } = useGetLoaiCVan();
+    const { data: linhvucData } = useGetLinhVuc();
 
     //Function
     const handleOpen = () => {
@@ -48,7 +57,6 @@ const CVanThem = ({ kieucvanden, kieucvandi, kieucvannoibo }) => {
         setOpen(false)
         setOpenInner(false)
     }
-
     const onNgayGuiChange = (selectedDate) => {
         setNgayGui(selectedDate);
     }
@@ -67,7 +75,6 @@ const CVanThem = ({ kieucvanden, kieucvandi, kieucvannoibo }) => {
             setFile(selectedFile);
         }
     }
-    console.log(file)
     const onTrangThaiChange = (e) => {
         setTrangThai(e.target.value);
     }
@@ -86,11 +93,19 @@ const CVanThem = ({ kieucvanden, kieucvandi, kieucvannoibo }) => {
     const onChuDeCVanChange = (e) => {
         setChuDeCVan(e.target.value)
     }
+    const onPhongBanChange = (e) => {
+        setPhongBan(e.target.value)
+    }
+    const onKyHieuCVanChange = (e) => {
+        setKyHieuCVan(e.target.value)
+    }
+    const onLinhVucChange = (e) => {
+        setLinhVuc(e.target.value)
+    }
 
     //Thêm nhân viên
     const onAddCongVan = async (congvan) => {
         await addCongVan.mutateAsync(congvan)
-        console.log(congvan)
     }
 
     const onSubmitCongVan = () => {
@@ -101,29 +116,78 @@ const CVanThem = ({ kieucvanden, kieucvandi, kieucvannoibo }) => {
             !file ||
             !trangthai ||
             !coquanbanhanh ||
+            !linhvuc ||
             !noiluubanchinh ||
+            !kyhieucvan ||
             !loaicvan // || !kieucvan
         ) {
             setError('Please fill in all required fields');
         }
         setError('');
-        const formData = new FormData();
-        formData.append('ngaygui', ngaygui);
-        formData.append('nguoinhan', nguoinhan);
-        formData.append('trichyeu', trichyeu);
-        formData.append('noidung', noidung);
-        formData.append('file', file);
-        formData.append('trangthai', trangthai);
-        formData.append('coquanbanhanh', coquanbanhanh);
-        formData.append('noiluubanchinh', noiluubanchinh);
-        formData.append('loaicvan', loaicvan);
-        formData.append('kieucvan', kieucvan);
-        onAddCongVan(formData);
+        // const formData = new FormData();
+        // formData.append('ngaygui', ngaygui);
+        // formData.append('kyhieucvan', kyhieucvan);
+        // formData.append('nguoinhan', nguoinhan);
+        // formData.append('trichyeu', trichyeu);
+        // formData.append('noidung', noidung);
+        // formData.append('file', file);
+        // formData.append('trangthai', trangthai);
+        // formData.append('coquanbanhanh', coquanbanhanh);
+        // formData.append('noiluubanchinh', noiluubanchinh);
+        // formData.append('loaicvan', loaicvan);
+        // formData.append('linhvuc', linhvuc);
+        // formData.append('kieucvan', kieucvan);
+        onAddCongVan({
+            ngaygui,
+            kyhieucvan,
+            nguoinhan,
+            trichyeu,
+            noidung,
+            file,
+            trangthai,
+            coquanbanhanh,
+            noiluubanchinh,
+            loaicvan,
+            linhvuc,
+            kieucvan,
+        });
         handleClose();
     }
+
+    //MenuItem cho PhongBan Select
+    let phongbanSelect = null;
+    if (phongbanData) {
+        phongbanSelect = phongbanData.map((phongban) => (
+            <MenuItem key={phongban._id} value={phongban._id}>
+                {phongban.tenphongban}
+            </MenuItem>
+        ))
+    }
+
+    //MenuItem cho LoaiCVan Select
+    let loaicvanSelect = null;
+    if (loaicvanData) {
+        loaicvanSelect = loaicvanData.map((loaicvan) => (
+            <MenuItem key={loaicvan._id} value={loaicvan._id}>
+                {loaicvan.tenloaicvan}
+            </MenuItem>
+        ))
+    }
+
+    //MenuItem cho LinhVuc Select
+    let linhvucSelect = null;
+    if (linhvucData) {
+        linhvucSelect = linhvucData.map((linhvuc) => (
+            <MenuItem key={linhvuc._id} value={linhvuc._id}>
+                {linhvuc.tenlinhvuc}
+            </MenuItem>
+        ))
+    }
+
     return (
         <form encType="multipart/form-data">
             <Box>
+                {error}
                 <Button variant="outlined" onClick={handleOpen} size='large'>
                     Thêm
                 </Button>
@@ -145,7 +209,6 @@ const CVanThem = ({ kieucvanden, kieucvandi, kieucvannoibo }) => {
                             autoComplete="off"
                         >
                             <div>
-
                                 <TextField
                                     onChange={onNguoiNhanChange}
                                     value={nguoinhan}
@@ -155,9 +218,9 @@ const CVanThem = ({ kieucvanden, kieucvandi, kieucvannoibo }) => {
                                     value={trichyeu}
                                     label="Trích yếu" />
                                 <TextField
-                                    onChange={onLoaiCongVanChange}
-                                    value={loaicvan}
-                                    label="Loại công văn" />
+                                    onChange={onKyHieuCVanChange}
+                                    value={kyhieucvan}
+                                    label="Ký hiệu" />
                                 <TextField
                                     onChange={onCoQuanBanHanhChange}
                                     value={coquanbanhanh}
@@ -175,6 +238,7 @@ const CVanThem = ({ kieucvanden, kieucvandi, kieucvannoibo }) => {
                                 <TextField
                                     onChange={onTrangThaiChange}
                                     select
+                                    defaultValue={trangthai}
                                     value={trangthai}
                                     label="Trang Thái">
                                     <MenuItem value={0}>Chưa ký duyệt</MenuItem>
@@ -198,34 +262,34 @@ const CVanThem = ({ kieucvanden, kieucvandi, kieucvannoibo }) => {
                                     id="outlined-select-manager"
                                     label="Chủ đề công văn">
                                 </TextField>
-                                {/* <TextField
-                                select
-                                label="Loại công văn">
-                                <MenuItem value={1}>Công văn đến</MenuItem>
-                                <MenuItem value={2}>Công văn đi</MenuItem>
-                                <MenuItem value={3}>Công văn nội bộ</MenuItem>
-                            </TextField> */}
-                                {/* <TextField
-                                select
-                                label="Phòng ban">
-                                <MenuItem value={1}>Công văn đến</MenuItem>
-                                <MenuItem value={2}>Công văn đi</MenuItem>
-                                <MenuItem value={3}>Công văn nội bộ</MenuItem>
-                            </TextField> */}
-                                <Button
-                                    style={{ top: "0.5rem", left: "0.5rem", width: "15rem" }}
-                                    variant='contained'
-                                    onClick={() => fileInputRef.current.click()}
-                                >
-                                    Chọn tệp tin
-                                </Button>
+                                <TextField
+                                    id="outlined-select-department"
+                                    onChange={onLinhVucChange}
+                                    defaultValue={linhvuc}
+                                    value={linhvuc}
+                                    select
+                                    label="Lĩnh vực">
+                                    {linhvucSelect}
+                                </TextField>
+                                <TextField
+                                    id="outlined-select-department"
+                                    onChange={onLoaiCongVanChange}
+                                    value={loaicvan}
+                                    select
+                                    label="Loại công văn">
+                                    {loaicvanSelect}
+                                </TextField>
+                                <TextField
+                                    id="outlined-select-department"
+                                    onChange={onPhongBanChange}
+                                    value={phongban}
+                                    select
+                                    label="Phòng ban">
+                                    {phongbanSelect}
+                                </TextField>
                                 <input
-                                    style={{ display: 'none' }}
-                                    type="file"
-                                    ref={fileInputRef}
                                     onChange={onFileChange}
-                                />
-                                <span>{file ? file.name : "Chọn tệp tin"}</span>
+                                    type='file'></input>
                                 <TextField
                                     onChange={onNoiDungChange}
                                     value={noidung}
@@ -233,7 +297,6 @@ const CVanThem = ({ kieucvanden, kieucvandi, kieucvannoibo }) => {
                                     label="Nội dung"
                                     multiline
                                     rows={4} />
-
                             </div>
                         </Box>
                     </DialogContent>

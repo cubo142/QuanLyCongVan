@@ -4,57 +4,47 @@ import CVanThem from '../CVanThem';
 import CVanXoa from '../CVanXoa';
 import CVanUpdate from '../CVanUpdate';
 
-const CVanNoiBo = () => {
+const CVanNoiBo = ({ congvannoiboData }) => {
 
     //Hiển thị option cho list
     const renderButton = (params) => {
         return (
             <div style={{ display: "flex" }}>
-                <CVanUpdate />
+                <CVanUpdate kieucvannoibo={"Công văn nội bộ"} congvannoiboID={params.row.id} />
                 <div className='space-width' />
-                <CVanXoa />
+                <CVanXoa congvannoiboID={params.row.id} />
             </div>
         )
     }
 
-    //Content mẫu cho datagrid
     const columns = [
-        { field: 'id', headerName: 'ID', width: 70 },
-        { field: 'firstName', headerName: 'First name', width: 130 },
-        { field: 'lastName', headerName: 'Last name', width: 130 },
-        {
-            field: 'age',
-            headerName: 'Age',
-            type: 'number',
-            width: 90,
-        },
-        {
-            field: 'fullName',
-            headerName: 'Full name',
-            description: 'This column has a value getter and is not sortable.',
-            sortable: false,
-            width: 160,
-            valueGetter: (params) =>
-                `${params.row.firstName || ''} ${params.row.lastName || ''}`,
-        },
+        { field: 'id', headerName: 'ID', width: 220 },
+        { field: 'kyhieucvan', headerName: 'Ký hiệu', flex: 1 },
+        { field: 'ngaygui', headerName: 'Ngày gửi', flex: 1 },
+        { field: 'loaicvan', headerName: 'Loại công văn', flex: 1 },
+        { field: 'linhvuc', headerName: 'Lĩnh vực', flex: 1 },
+        { field: 'file', headerName: 'File', flex: 1 },
+        { field: 'trangthai', headerName: 'Trạng thái', flex: 1 },
         { field: 'option', headerName: 'Chức năng', flex: 1, renderCell: renderButton, sortable: false }
     ];
 
-    const rows = [
-        { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-        { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-        { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-        { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-        { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-        { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-        { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-        { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-        { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-    ];
+    //Rows
+    const rows = congvannoiboData ? [...congvannoiboData].reverse().map((item) => {
+        return {
+            id: item._id,
+            kyhieucvan: item.kyhieucvan,
+            ngaygui: item.ngaygui,
+            loaicvan: item.loaicvan,
+            linhvuc: item.linhvuc ? item.linhvuc.tenlinhvuc : "N/A",
+            file: item.filename,
+            trangthai: item.trangthai === 0 ? "Chưa ký duyệt" : "Đã ký duyệt"
+        };
+    }) : [];
+    console.log(congvannoiboData)
 
     return (
         <>
-            <div style={{ float: "right" }}><CVanThem kieucvannoibo={"Công văn nội bộ"}/></div>
+            <div style={{ float: "right" }}><CVanThem kieucvannoibo={"Công văn nội bộ"} /></div>
             <h5>Công văn nội bộ</h5>
             <div style={{ height: '100%', width: '100%' }}>
                 <DataGrid

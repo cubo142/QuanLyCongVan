@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Box, Button, TextField, MenuItem, Tab } from '@mui/material';
 import "./congvan.css"
 import { Grid } from '@mui/material';
-
+import { useGetCongVan } from '../../api/CongVan/useCongVan';
 import { TabContext } from '@material-ui/lab';
 import { TabList } from '@material-ui/lab';
 import { TabPanel } from '@material-ui/lab';
@@ -12,6 +12,7 @@ import CVanNoiBo from './CVanNoiBo/CVanNoiBo';
 import CVanThem from './CVanThem';
 import CVanXoa from './CVanXoa';
 import CVanUpdate from './CVanUpdate';
+import { useEffect } from 'react';
 
 const pageStyle = {
     display: 'flex',
@@ -20,13 +21,26 @@ const pageStyle = {
     margin: "auto"
 }
 
-
 const CVanMain = () => {
-
-
     const [age, setAge] = useState('')
-
     const [value, setValue] = useState('1')
+    //Hooks
+    const { data: congvanData, isLoading, error } = useGetCongVan();
+    const [congvandenData, setCongVanDenData] = useState(null)
+    const [congvandiData, setCongVanDiData] = useState(null)
+    const [congvannoiboData, setCongVanNoiBoData] = useState(null)
+
+
+    useEffect(() => {
+        if (congvanData) {
+            let congvannoibo = congvanData.filter((congvan) => congvan.kieucvan === "Công văn nội bộ")
+            let congvandi = congvanData.filter((congvan) => congvan.kieucvan === "Công văn đi")
+            let congvanden = congvanData.filter((congvan) => congvan.kieucvan === "Công văn đến")
+            setCongVanDenData(congvanden)
+            setCongVanDiData(congvandi)
+            setCongVanNoiBoData(congvannoibo)
+        }
+    }, [congvanData])
 
     //Function mẫu thay đổi value của Select
     const handleChange = (e) => {
@@ -37,6 +51,14 @@ const CVanMain = () => {
     const handleChangeTab = (e, newValue) => {
         setValue(newValue);
     };
+
+    if (isLoading) {
+        return "Is Loading...."
+    }
+
+    if (error) {
+        return <div>{error.message}</div>;
+    }
 
 
 
@@ -155,13 +177,13 @@ const CVanMain = () => {
                                 </TabList>
                             </Box>
                             <TabPanel value='1'>
-                                <CVanDen CVanXoa={CVanXoa} CVanThem={CVanThem} CVanUpdate={CVanUpdate} />
+                                <CVanDen congvandenData={congvandenData} CVanXoa={CVanXoa} CVanThem={CVanThem} CVanUpdate={CVanUpdate} />
                             </TabPanel>
                             <TabPanel value='2'>
-                                <CVanDi CVanXoa={CVanXoa} CVanThem={CVanThem} CVanUpdate={CVanUpdate} />
+                                <CVanDi congvandiData={congvandiData} CVanXoa={CVanXoa} CVanThem={CVanThem} CVanUpdate={CVanUpdate} />
                             </TabPanel>
                             <TabPanel value='3'>
-                                <CVanNoiBo CVanXoa={CVanXoa} CVanThem={CVanThem} CVanUpdate={CVanUpdate} />
+                                <CVanNoiBo congvannoiboData={congvannoiboData} CVanXoa={CVanXoa} CVanThem={CVanThem} CVanUpdate={CVanUpdate} />
                             </TabPanel>
                         </TabContext>
                     </Box>
