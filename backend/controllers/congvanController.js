@@ -20,6 +20,7 @@ const createCongvan = async (req, res) => {
         trichyeu: req.body.trichyeu,
         noidung: req.body.noidung,
         file: req.file.buffer,
+        fileurl: `files/${req.file.filename}`,
         filename: req.file.originalname,
         trangthai: req.body.trangthai,
         ngaygui: req.body.ngaygui,
@@ -45,38 +46,45 @@ const createCongvan = async (req, res) => {
 
 //Update 1
 const updateCongvan = async (req, res) => {
-    const congvan = await Congvan.findById(req.params.id)
+    const congvan = await Congvan.findById(req.params.id);
     try {
-        if (congvan == null) {
-            return res.status(404).json({ message: 'Congvan not found' })
-        }
-        else {
-            //Body nhận data truyền vào
-            congvan.kyhieucvan = req.body.kyhieucvan
-            congvan.nguoinhan = req.body.nguoinhan
-            congvan.trichyeu = req.body.trichyeu
-            congvan.noidung = req.body.noidung
-            congvan.file = req.body.file
-            congvan.filename = req.file.originalname
-            congvan.trangthai = req.body.trangthai
-            congvan.ngaygui = req.body.ngaygui
-            congvan.coquanbanhanh = req.body.coquanbanhanh
-            congvan.noiluubanchinh = req.body.noiluubanchinh
-            congvan.loaicvan = req.body.loaicvan
-            congvan.chudecvan = req.body.chudecvan
-            congvan.phongban = req.body.phongban
-            congvan.linhvuc = req.body.linhvuc
-            congvan.kieucvan = req.body.kieucvan
-
-            const updateCongvan = await congvan.save()
-            res.json(updateCongvan)
+        if (!congvan) {
+            return res.status(404).json({ message: 'Congvan not found' });
         }
 
+        // Cập nhật các trường chung
+        congvan.kyhieucvan = req.body.kyhieucvan;
+        congvan.nguoinhan = req.body.nguoinhan;
+        congvan.trichyeu = req.body.trichyeu;
+        congvan.noidung = req.body.noidung;
+        congvan.trangthai = req.body.trangthai;
+        congvan.ngaygui = req.body.ngaygui;
+        congvan.coquanbanhanh = req.body.coquanbanhanh;
+        congvan.noiluubanchinh = req.body.noiluubanchinh;
+        congvan.loaicvan = req.body.loaicvan;
+        congvan.chudecvan = req.body.chudecvan;
+        congvan.linhvuc = req.body.linhvuc;
+        congvan.kieucvan = req.body.kieucvan;
+
+        //Tách chuỗi các ID thành mảng
+        //do data req là "id1,id2,id3" => dùng split tách thành [id1,id2,id3]
+        congvan.phongban = req.body.phongban;
+        const phongbanIds = req.body.phongban.split(',');
+        congvan.phongban = phongbanIds;
+
+        // Kiểm tra nếu có file mới được chọn
+        if (req.file) {
+            congvan.file = req.file.buffer;
+            congvan.filename = req.file.originalname;
+            congvan.fileurl = `files/${req.file.filename}`;
+        }
+
+        const updateCongvan = await congvan.save().populate('loaicvan').populate('chudecvan').populate('phongban').populate('linhvuc');
+        res.json(updateCongvan);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
     }
-    catch (err) {
-        res.status(500).json({ message: err.message })
-    }
-}
+};
 
 //Delete 1
 const deleteCongvan = async (req, res) => {
@@ -97,7 +105,7 @@ const deleteCongvan = async (req, res) => {
 //Get by ID
 const getCongvanById = async (req, res) => {
     try {
-        const congvan = await Congvan.findById(req.params.id)
+        const congvan = await Congvan.findById(req.params.id).populate('loaicvan').populate('chudecvan').populate('phongban').populate('linhvuc');
         if (congvan == null) {
             return res.status(404).json({ message: "Cannot find congvan" })
         }

@@ -18,7 +18,11 @@ const CVanNoiBo = ({ congvannoiboData }) => {
     }
 
     const columns = [
-        { field: 'id', headerName: 'ID', width: 220 },
+        {
+            field: 'id', headerName: 'ID', width: 220, renderCell: (params) => {
+                return <a href={`/congvan/${params.id}`}>{params.id}</a>;
+            },
+        },
         { field: 'kyhieucvan', headerName: 'Ký hiệu', flex: 1 },
         { field: 'ngaygui', headerName: 'Ngày gửi', flex: 1 },
         { field: 'loaicvan', headerName: 'Loại công văn', flex: 1 },
@@ -40,7 +44,6 @@ const CVanNoiBo = ({ congvannoiboData }) => {
             trangthai: item.trangthai === 0 ? "Chưa ký duyệt" : "Đã ký duyệt"
         };
     }) : [];
-    console.log(congvannoiboData)
 
     return (
         <>

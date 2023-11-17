@@ -19,7 +19,11 @@ const CVanDen = ({ congvandenData }) => {
 
 
     const columns = [
-        { field: 'id', headerName: 'ID', width: 220 },
+        {
+            field: 'id', headerName: 'ID', width: 220, renderCell: (params) => {
+                return <a href={`/congvan/${params.id}`}>{params.id}</a>;
+            },
+        },
         { field: 'kyhieucvan', headerName: 'Ký hiệu', flex: 1 },
         { field: 'ngaygui', headerName: 'Ngày gửi', flex: 1 },
         { field: 'loaicvan', headerName: 'Loại công văn', flex: 1 },

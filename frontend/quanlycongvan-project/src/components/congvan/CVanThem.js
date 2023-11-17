@@ -109,7 +109,8 @@ const CVanThem = ({ kieucvanden, kieucvandi, kieucvannoibo }) => {
     }
 
     const onSubmitCongVan = () => {
-        if (!ngaygui ||
+        if (!chudecvan ||
+            !ngaygui ||
             !nguoinhan ||
             !trichyeu ||
             !noidung ||
@@ -150,6 +151,7 @@ const CVanThem = ({ kieucvanden, kieucvandi, kieucvannoibo }) => {
             loaicvan,
             linhvuc,
             kieucvan,
+            chudecvan
         });
         handleClose();
     }
