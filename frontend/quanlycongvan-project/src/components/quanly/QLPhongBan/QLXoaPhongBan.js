@@ -26,7 +26,7 @@ const QLXoaPhongBan = ({ phongbanID }) => {
         await deletePhongBan.mutateAsync(id);
     }
     const handleDelete = () => {
-        onDeletePhongBan(phongbanID); // Gọi hàm xóa dữ liệu với nhanvienID
+        onDeletePhongBan(phongbanID); // Gọi hàm xóa dữ liệu với phongbanID
         handleClose(); // Sau khi xóa, đóng hộp thoại
     }
 
