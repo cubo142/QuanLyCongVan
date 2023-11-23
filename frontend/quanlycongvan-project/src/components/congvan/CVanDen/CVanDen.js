@@ -28,7 +28,12 @@ const CVanDen = ({ congvandenData }) => {
         { field: 'ngaygui', headerName: 'Ngày gửi', flex: 1 },
         { field: 'loaicvan', headerName: 'Loại công văn', flex: 1 },
         { field: 'linhvuc', headerName: 'Lĩnh vực', flex: 1 },
-        { field: 'file', headerName: 'File', flex: 1 },
+        {
+            field: 'file', headerName: 'File', renderCell: (params) => {
+                console.log(params.row.file)
+                return <a href={`http://localhost:8000/congvans/download/${params.row.fileurl}`}>{params.row.file}</a>
+            }
+        },
         { field: 'trangthai', headerName: 'Trạng thái', flex: 1 },
         { field: 'option', headerName: 'Chức năng', flex: 1, renderCell: renderButton, sortable: false }
     ];
@@ -42,6 +47,7 @@ const CVanDen = ({ congvandenData }) => {
             loaicvan: item.loaicvan.tenloaicvan,
             linhvuc: item.linhvuc ? item.linhvuc.tenlinhvuc : "N/A",
             file: item.filename,
+            fileurl: item.fileurl,
             trangthai: item.trangthai === 0 ? "Chưa ký duyệt" : "Đã ký duyệt"
         };
     }) : [];

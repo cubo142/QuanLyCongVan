@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Box, Button, Checkbox } from '@mui/material';
 import { Grid } from '@material-ui/core';
 import { useUpdateCongVan, useGetCongVanById } from '../../api/CongVan/useCongVan';
 import { useGetPhongBan } from '../../api/PhongBan/usePhongBan';
+import { Document, Page, pdfjs } from 'react-pdf';
 import "./congvan.css"
 const CVanDetail = () => {
 
@@ -16,12 +17,20 @@ const CVanDetail = () => {
     }
     //Lấy id từ url
     const _congvanID = useParams();
+    //other State
+    const [numPages, setNumPages] = useState();
+    const [pageNumber, setPageNumber] = useState(1);
 
     //Hooks
     const updateCongVan = useUpdateCongVan();
     const { data: congvanData, isLoading, error } = useGetCongVanById(_congvanID.id);
     const { data: phongbanData } = useGetPhongBan();
     const [phongban, setPhongBan] = useState([])
+
+    useEffect(() => {
+        pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`; //Lỗi version thư viện  
+    });
+
 
     //Function
     //Thêm phongban vào list
@@ -35,6 +44,23 @@ const CVanDetail = () => {
             setPhongBan(prevState => [...prevState, phongbanID]);
         }
     }
+
+    //Xử lý PDF
+    function onDocumentLoadSuccess({ numPages }) {
+        setNumPages(numPages)
+    }
+
+    const handleNextPage = () => {
+        if (pageNumber < numPages) {
+            setPageNumber(pageNumber + 1);
+        }
+    };
+
+    const handlePrevPage = () => {
+        if (pageNumber > 1) {
+            setPageNumber(pageNumber - 1);
+        }
+    };
 
     //Update công văn
     const onUpdateCongVan = async (congvan) => {
@@ -123,9 +149,38 @@ const CVanDetail = () => {
                 </Grid>
             </Box>
             <div style={{ height: "16px" }} />
-            <h3>Tên file ghi ở đây</h3>
+            <h3>{congvanData.filename}</h3>
             <Box className="detail-box">
-
+                <Box style={{ margin: "auto" }}>
+                    <Button onClick={handlePrevPage} disabled={pageNumber === 1}>
+                        Previous Page
+                    </Button>
+                    <span> Page {pageNumber} / {numPages} </span>
+                    <Button onClick={handleNextPage} disabled={pageNumber === numPages}>
+                        Next Page
+                    </Button>
+                </Box>
+                <Box style={{ outline: "1px solid gray", display: "flex", justifyContent: "center" }}>
+                    <Document
+                        file={`http://localhost:8000/congvans/download/${congvanData.fileurl}`}
+                        onLoadSuccess={onDocumentLoadSuccess}
+                    >
+                        <Page
+                            scale={1.5}
+                            renderAnnotationLayer={false}
+                            renderTextLayer={false}
+                            pageNumber={pageNumber} />
+                    </Document>
+                </Box>
+                <Box style={{ margin: "auto" }}>
+                    <Button onClick={handlePrevPage} disabled={pageNumber === 1}>
+                        Previous Page
+                    </Button>
+                    <span> Page {pageNumber} / {numPages} </span>
+                    <Button onClick={handleNextPage} disabled={pageNumber === numPages}>
+                        Next Page
+                    </Button>
+                </Box>
             </Box>
 
         </div>

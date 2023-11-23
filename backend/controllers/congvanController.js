@@ -1,5 +1,7 @@
 const Congvan = require('../models/congvans')
 const { mwUploadFile } = require('../middlewares/mwUploadFile');
+const path = require('path');
+const fs = require('fs');
 
 //Get All
 const getAllCongvans = async (req, res) => {
@@ -14,6 +16,7 @@ const getAllCongvans = async (req, res) => {
 
 //Create 1
 const createCongvan = async (req, res) => {
+    console.log(req.body)
     const congvan = new Congvan({
         kyhieucvan: req.body.kyhieucvan,
         nguoinhan: req.body.nguoinhan,
@@ -68,9 +71,11 @@ const updateCongvan = async (req, res) => {
 
         //Tách chuỗi các ID thành mảng
         //do data req là "id1,id2,id3" => dùng split tách thành [id1,id2,id3]
-        congvan.phongban = req.body.phongban;
-        const phongbanIds = req.body.phongban.split(',');
-        congvan.phongban = phongbanIds;
+        if (req.phongban) {
+            congvan.phongban = req.body.phongban;
+            const phongbanIds = req.body.phongban.split(',');
+            congvan.phongban = phongbanIds;
+        }
 
         // Kiểm tra nếu có file mới được chọn
         if (req.file) {
@@ -78,8 +83,7 @@ const updateCongvan = async (req, res) => {
             congvan.filename = req.file.originalname;
             congvan.fileurl = `files/${req.file.filename}`;
         }
-
-        const updateCongvan = await congvan.save().populate('loaicvan').populate('chudecvan').populate('phongban').populate('linhvuc');
+        const updateCongvan = await congvan.save();
         res.json(updateCongvan);
     } catch (err) {
         res.status(500).json({ message: err.message });
@@ -117,10 +121,37 @@ const getCongvanById = async (req, res) => {
     }
 }
 
+//DownFile
+const getDownFileFromCongVan = async (req, res) => {
+    try {
+        const filename = req.params.filename;
+        const folderPath = path.join(__dirname, '..', 'files/'); // '..' để trở về một cấp độ thư mục
+
+        const filePath = path.join(folderPath, filename);
+
+        // Kiểm tra xem file có tồn tại không
+        if (!fs.existsSync(filePath)) {
+            return res.status(404).send('File not found');
+        }
+
+        // Thiết lập header để trình duyệt hiểu rằng đây là file PDF
+        res.setHeader('Content-Type', 'application/pdf');
+        res.setHeader('Content-Disposition', `attachment; filename=${filename}`);
+
+        // Đọc file và truyền nó vào response
+        const fileStream = fs.createReadStream(filePath);
+        fileStream.pipe(res);
+
+    } catch (err) {
+        console.error('Error downloading file:', err);
+        res.status(500).send('Internal Server Error');
+    }
+};
 module.exports = {
     getAllCongvans,
     getCongvanById,
     createCongvan,
     deleteCongvan,
-    updateCongvan
+    updateCongvan,
+    getDownFileFromCongVan
 };
