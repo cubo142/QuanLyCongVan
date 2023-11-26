@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Box, Button, Checkbox } from '@mui/material';
 import { Grid } from '@material-ui/core';
-import { useUpdateCongVan, useGetCongVanById } from '../../api/CongVan/useCongVan';
+import { useUpdateCongVan, useGetCongVanById, useGetCongVan } from '../../api/CongVan/useCongVan';
 import { useGetPhongBan } from '../../api/PhongBan/usePhongBan';
 import { Document, Page, pdfjs } from 'react-pdf';
 import "./congvan.css"
@@ -23,27 +23,36 @@ const CVanDetail = () => {
 
     //Hooks
     const updateCongVan = useUpdateCongVan();
-    const { data: congvanData, isLoading, error } = useGetCongVanById(_congvanID.id);
+    const { data: congvanDataById, isLoading, error } = useGetCongVanById(_congvanID.id);
     const { data: phongbanData } = useGetPhongBan();
     const [phongban, setPhongBan] = useState([])
+
 
     useEffect(() => {
         pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`; //Lỗi version thư viện  
     });
 
+    useEffect(() => {
+        //Set initial state cho phòng ban aka các phongban của congvan
+        if (congvanDataById && congvanDataById.phongban) {
+            const phongbanIds = congvanDataById.phongban.map((pb) => pb._id);
+            setPhongBan(phongbanIds);
+        }
+    }, [congvanDataById]);
 
     //Function
     //Thêm phongban vào list
     const onCheckBoxChanged = (e) => {
-        let phongbanID = e.target.value
-        const isSelected = phongban.includes(phongbanID);
-        if (isSelected) {
-            setPhongBan(prevState => prevState.filter(id => id !== phongbanID));
-        }
-        else {
-            setPhongBan(prevState => [...prevState, phongbanID]);
-        }
-    }
+        const phongbanID = e.target.value;
+        setPhongBan((prevPhongBan) => {
+            const isSelected = prevPhongBan.includes(phongbanID);
+            if (isSelected) {
+                return prevPhongBan.filter((id) => id !== phongbanID);
+            } else {
+                return [...prevPhongBan, phongbanID];
+            }
+        });
+    };
 
     //Xử lý PDF
     function onDocumentLoadSuccess({ numPages }) {
@@ -68,21 +77,21 @@ const CVanDetail = () => {
     }
 
     const onSubmitCongVan = () => {
-        if (congvanData) {
+        if (congvanDataById) {
             let congvanID = _congvanID.id
-            let chudecvan = congvanData.chudecvan
-            let ngaygui = congvanData.ngaygui
-            let kyhieucvan = congvanData.kyhieucvan
-            let nguoinhan = congvanData.nguoinhan
-            let file = congvanData.file
-            let trichyeu = congvanData.trichyeu
-            let noidung = congvanData.noidung
-            let trangthai = congvanData.trangthai
-            let coquanbanhanh = congvanData.coquanbanhanh
-            let noiluubanchinh = congvanData.noiluubanchinh
-            let loaicvan = congvanData.loaicvan._id
-            let linhvuc = congvanData.linhvuc._id
-            let kieucvan = congvanData.kieucvan
+            let chudecvan = congvanDataById.chudecvan
+            let ngaygui = congvanDataById.ngaygui
+            let kyhieucvan = congvanDataById.kyhieucvan
+            let nguoinhan = congvanDataById.nguoinhan
+            let file = congvanDataById.file
+            let trichyeu = congvanDataById.trichyeu
+            let noidung = congvanDataById.noidung
+            let trangthai = congvanDataById.trangthai
+            let coquanbanhanh = congvanDataById.coquanbanhanh
+            let noiluubanchinh = congvanDataById.noiluubanchinh
+            let loaicvan = congvanDataById.loaicvan._id
+            let linhvuc = congvanDataById.linhvuc._id
+            let kieucvan = congvanDataById.kieucvan
             onUpdateCongVan({
                 chudecvan,
                 ngaygui,
@@ -107,14 +116,17 @@ const CVanDetail = () => {
     //Checklist
     let renderCheckList = null;
     if (phongbanData) {
-        renderCheckList = phongbanData.map((phongban) => (
-            <div key={phongban._id} className="container">
-                <Checkbox value={phongban._id} onChange={onCheckBoxChanged} defaultChecked={false} />
-                {phongban.tenphongban}
-            </div >
-        ))
+        renderCheckList = phongbanData.map((pb) => {
+            //kiểm tra nếu phongban của congvan có trong data của phongban
+            const isPhongbanExist = phongban.includes(pb._id);
+            return (
+                <div key={pb._id} className="container">
+                    <Checkbox value={pb._id} onChange={onCheckBoxChanged} checked={isPhongbanExist} />
+                    {pb.tenphongban}
+                </div>
+            );
+        });
     }
-
 
     if (isLoading) {
         return "Is Loading...."
@@ -127,19 +139,19 @@ const CVanDetail = () => {
     return (
         <div style={pageStyle}>
             <section id="header">
-                <h3>Công văn:{congvanData.kyhieucvan} </h3>
+                <h3>Công văn:{congvanDataById.kyhieucvan} </h3>
             </section>
             <Box className="detail-box">
                 <Grid container spacing={2}>
                     <Grid item xs={6}>
-                        <p>Chủ đề:{congvanData.chudecvan}</p>
-                        <p>Người nhận:{congvanData.nguoinhan}</p>
-                        <p>Trích yếu:{congvanData.trichyeu}</p>
-                        <p>Ngày gửi:{congvanData.ngaygui}</p>
-                        <p>Cơ quan ban hành:{congvanData.coquanbanhanh}</p>
-                        <p>Nơi lưu bản chính:{congvanData.noiluubanchinh}</p>
-                        <p>Loại công văn:{congvanData.loaicvan.tenloaicvan}</p>
-                        <p>Lĩnh vực:{congvanData.nguoinhan}</p>
+                        <p>Chủ đề:{congvanDataById.chudecvan}</p>
+                        <p>Người nhận:{congvanDataById.nguoinhan}</p>
+                        <p>Trích yếu:{congvanDataById.trichyeu}</p>
+                        <p>Ngày gửi:{congvanDataById.ngaygui}</p>
+                        <p>Cơ quan ban hành:{congvanDataById.coquanbanhanh}</p>
+                        <p>Nơi lưu bản chính:{congvanDataById.noiluubanchinh}</p>
+                        <p>Loại công văn:{congvanDataById.loaicvan.tenloaicvan}</p>
+                        <p>Lĩnh vực:{congvanDataById.nguoinhan}</p>
                     </Grid>
                     <Grid item xs={6}>
                         <h4>Gửi tới phòng ban:</h4>
@@ -149,7 +161,7 @@ const CVanDetail = () => {
                 </Grid>
             </Box>
             <div style={{ height: "16px" }} />
-            <h3>{congvanData.filename}</h3>
+            <h3>{congvanDataById.filename}</h3>
             <Box className="detail-box">
                 <Box style={{ margin: "auto" }}>
                     <Button onClick={handlePrevPage} disabled={pageNumber === 1}>
@@ -162,7 +174,7 @@ const CVanDetail = () => {
                 </Box>
                 <Box style={{ outline: "1px solid gray", display: "flex", justifyContent: "center" }}>
                     <Document
-                        file={`http://localhost:8000/congvans/download/${congvanData.fileurl}`}
+                        file={`http://localhost:8000/congvans/download/${congvanDataById.fileurl}`}
                         onLoadSuccess={onDocumentLoadSuccess}
                     >
                         <Page

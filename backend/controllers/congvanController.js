@@ -71,10 +71,13 @@ const updateCongvan = async (req, res) => {
 
         //Tách chuỗi các ID thành mảng
         //do data req là "id1,id2,id3" => dùng split tách thành [id1,id2,id3]
-        if (req.phongban) {
+        if (req.body.phongban) {
             congvan.phongban = req.body.phongban;
             const phongbanIds = req.body.phongban.split(',');
             congvan.phongban = phongbanIds;
+        }
+        else {
+            congvan.phongban = [];
         }
 
         // Kiểm tra nếu có file mới được chọn
