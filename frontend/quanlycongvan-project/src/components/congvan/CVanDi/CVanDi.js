@@ -38,7 +38,7 @@ const CVanDi = ({ congvandiData }) => {
             id: item._id,
             kyhieucvan: item.kyhieucvan,
             ngaygui: item.ngaygui,
-            loaicvan: item.loaicvan,
+            loaicvan: item.loaicvan.tenloaicvan,
             linhvuc: item.linhvuc ? item.linhvuc.tenlinhvuc : "N/A",
             file: item.filename,
             trangthai: item.trangthai === 0 ? "Chưa ký duyệt" : "Đã ký duyệt"

@@ -7,6 +7,8 @@ import QLCapNhatPhongBan from './QLCapNhatPhongBan'
 import SearchBar from '../../global/SearchBar';
 import '../quanly.css'
 import { useGetPhongBan } from '../../../api/PhongBan/usePhongBan';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 
 const QLPhongBan = () => {
@@ -17,9 +19,33 @@ const QLPhongBan = () => {
         margin: "auto",
         width: "100%"
     }
-    
     //Lấy data
     const { data: phongbanData, isLoading, error } = useGetPhongBan();
+
+    //******* Chức năng search *******
+    //PhongBan được search
+    const [filteredPhongBan, setFilteredPhongBan] = useState("");
+
+
+    //useEffect
+    useEffect(() => {
+        if (phongbanData) {
+            setFilteredPhongBan(phongbanData)
+        }
+    }, [phongbanData])
+
+    //Search method
+    const handleSearchPhongBan = (query) => {
+        if (phongbanData) {
+            var searchResult = phongbanData.filter((phongban) => phongban.tenphongban.toLowerCase().indexOf(query.toLowerCase()) !== -1); //đưa tất cả về lowercase
+            setFilteredPhongBan(searchResult);
+        }
+
+    }
+
+    //*************************************/
+
+
 
     if (isLoading) {
         return "Cò lỗi gì đó đã xảy ra"
@@ -28,8 +54,6 @@ const QLPhongBan = () => {
     if (error) {
         return <div>{error.message}</div>;
     }
-
-
 
     //Hiển thị option cho list
     const renderButton = (params) => {
@@ -52,7 +76,7 @@ const QLPhongBan = () => {
     ];
 
     //Rows
-    const rows = phongbanData ? [...phongbanData].reverse().map((item) => {
+    const rows = filteredPhongBan ? [...filteredPhongBan].reverse().map((item) => {
         return {
             id: item._id,
             tenphongban: item.tenphongban,
@@ -64,7 +88,7 @@ const QLPhongBan = () => {
         <Box style={pageStyle}>
             <div className='app-bar'>
                 <div className="search-bar">
-                    <SearchBar />
+                    <SearchBar handleSearchPhongBan={handleSearchPhongBan} />
                 </div>
                 <div className='space-width' />
                 <div className="add-button">

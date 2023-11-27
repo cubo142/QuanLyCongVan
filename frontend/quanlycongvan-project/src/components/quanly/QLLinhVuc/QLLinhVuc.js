@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Box } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import QLThemLinhVuc from './QLThemLinhVuc';
@@ -17,9 +17,33 @@ const QLLinhVuc = () => {
         margin: "auto",
         width: "100%"
     }
-    
+
     //Lấy data
     const { data: linhvucData, isLoading, error } = useGetLinhVuc();
+
+    //******* Chức năng search *******
+    //LinhVuc được search
+    const [filteredLinhVuc, setFilteredLinhVuc] = useState("");
+
+
+    //useEffect
+    useEffect(() => {
+        if (linhvucData) {
+            setFilteredLinhVuc(linhvucData)
+        }
+    }, [linhvucData])
+
+    //Search method
+    const handleSearchLinhVuc = (query) => {
+        if (linhvucData) {
+            var searchResult = linhvucData.filter((linhvuc) => linhvuc.tenlinhvuc.toLowerCase().indexOf(query.toLowerCase()) !== -1); //đưa tất cả về lowercase
+            setFilteredLinhVuc(searchResult);
+        }
+
+    }
+
+    //*************************************/
+
 
     if (isLoading) {
         return "Có lỗi gì đó đã xảy ra"
@@ -51,7 +75,7 @@ const QLLinhVuc = () => {
     ];
 
     //Rows
-    const rows = linhvucData ? [...linhvucData].reverse().map((item) => {
+    const rows = filteredLinhVuc ? [...filteredLinhVuc].reverse().map((item) => {
         return {
             id: item._id,
             tenlinhvuc: item.tenlinhvuc,
@@ -62,7 +86,7 @@ const QLLinhVuc = () => {
         <Box style={pageStyle}>
             <div className='app-bar'>
                 <div className="search-bar">
-                    <SearchBar />
+                    <SearchBar handleSearchLinhVuc={handleSearchLinhVuc} />
                 </div>
                 <div className='space-width' />
                 <div className="add-button">

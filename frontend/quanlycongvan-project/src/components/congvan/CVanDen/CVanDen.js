@@ -30,7 +30,6 @@ const CVanDen = ({ congvandenData }) => {
         { field: 'linhvuc', headerName: 'Lĩnh vực', flex: 1 },
         {
             field: 'file', headerName: 'File', renderCell: (params) => {
-                console.log(params.row.file)
                 return <a href={`http://localhost:8000/congvans/download/${params.row.fileurl}`}>{params.row.file}</a>
             }
         },
