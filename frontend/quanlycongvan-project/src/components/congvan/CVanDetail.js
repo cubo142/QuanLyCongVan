@@ -139,7 +139,7 @@ const CVanDetail = () => {
                         <p>Cơ quan ban hành:{congvanData.coquanbanhanh}</p>
                         <p>Nơi lưu bản chính:{congvanData.noiluubanchinh}</p>
                         <p>Loại công văn:{congvanData.loaicvan.tenloaicvan}</p>
-                        <p>Lĩnh vực:{congvanData.nguoinhan}</p>
+                        <p>Lĩnh vực:{congvanData.linhvuc.tenlinhvuc}</p>
                     </Grid>
                     <Grid item xs={6}>
                         <h4>Gửi tới phòng ban:</h4>
