@@ -21,7 +21,12 @@ const SideNavigationBar = () => {
 
                     {/* Công văn*/}
                     <SubMenu icon={<FiBookOpen />} label="Công văn">
-                        <MenuItem component={<Link to="/congvan" />}>Quản lý công văn</MenuItem>              
+                        <MenuItem component={<Link to="/congvan" />}>Quản lý công văn</MenuItem>
+                    </SubMenu>
+
+                    {/* Loại công văn*/}
+                    <SubMenu icon={<FiBookOpen />} label="Loại công văn">
+                        <MenuItem component={<Link to="/loaicvan" />}>Quản lý loại công văn</MenuItem>
                     </SubMenu>
 
                     {/* Đăng xuất */}

@@ -3,10 +3,12 @@ import PageTrangChu from './pages/PageTrangChu';
 import PageQuanLy from './pages/PageNhanVien';
 import PagePhongBan from './pages/PagePhongBan';
 import PageLinhVuc from './pages/PageLinhVuc';
-import { Routes, Route } from "react-router-dom";
 import PageCongVan from "./pages/PageCongVan";
-import { QueryClient, QueryClientProvider } from "react-query";
 import CVanDetail from "./components/congvan/CVanDetail";
+import PageLoaiCVan from './pages/PageLoaiCVan';
+import { Routes, Route } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "react-query";
+
 
 const queryClient = new QueryClient({});
 
@@ -21,6 +23,7 @@ function App() {
           <Route path="linhvuc" element={<PageLinhVuc />} />
           <Route path="congvan" element={<PageCongVan />} />
           <Route path="/congvan/:id" element={<CVanDetail />} />
+          <Route path="loaicvan" element={<PageLoaiCVan />} />
         </Routes>
       </QueryClientProvider>
     </Layout>
