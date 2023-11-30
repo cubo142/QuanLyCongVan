@@ -5,7 +5,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { useAddCongVan } from '../../api/CongVan/useCongVan';
 import { useGetLoaiCVan } from '../../api/LoaiCVan/useLoaiCVan';
 import { useGetLinhVuc } from '../../api/LinhVuc/useLinhVuc';
-const CVanThem = ({ kieucvanden, kieucvandi, kieucvannoibo }) => {
+const CVanThem = ({ kieucvanden, kieucvandi, kieucvannoibo, isUserAllow }) => {
 
     //styles
 
@@ -156,12 +156,11 @@ const CVanThem = ({ kieucvanden, kieucvandi, kieucvannoibo }) => {
             </MenuItem>
         ))
     }
-
     return (
         <form encType="multipart/form-data">
             <Box>
                 {error}
-                <Button variant="outlined" onClick={handleOpen} size='large'>
+                <Button style={{ display: isUserAllow() ? 'none' : 'inline-block' }} variant="outlined" onClick={handleOpen} size='large'>
                     Thêm
                 </Button>
                 <Dialog

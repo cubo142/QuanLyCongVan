@@ -7,7 +7,7 @@ import QLCapNhatLoaiCVan from './QLCapNhatLoaiCVan'
 import SearchBar from '../../global/SearchBar';
 import '../quanly.css'
 import { useGetLoaiCVan } from '../../../api/LoaiCVan/useLoaiCVan';
-
+import { isUserAllow } from '../../../utils/utils';
 
 const QLLoaiCVan = () => {
     const pageStyle = {
@@ -17,7 +17,7 @@ const QLLoaiCVan = () => {
         margin: "auto",
         width: "100%"
     }
-    
+
     //Lấy data
     const { data: loaicvanData, isLoading, error } = useGetLoaiCVan();
 
@@ -47,7 +47,7 @@ const QLLoaiCVan = () => {
         { field: 'id', headerName: 'ID', width: 220 },
         { field: 'tenloaicvan', headerName: 'Tên loại công văn', flex: 1 },
         { field: 'kyhieu', headerName: 'Ký hiệu', flex: 1 },
-        { field: 'option', headerName: 'Chức năng', flex: 1, renderCell: renderButton, sortable: false }
+        isUserAllow() ? "" : { field: 'option', headerName: 'Chức năng', flex: 1, renderCell: renderButton, sortable: false }
     ];
 
     //Rows
@@ -66,7 +66,7 @@ const QLLoaiCVan = () => {
                 </div>
                 <div className='space-width' />
                 <div className="add-button">
-                    <QLThemLoaiCVan />
+                    <QLThemLoaiCVan isUserAllow={isUserAllow} />
                 </div>
             </div>
 

@@ -4,7 +4,7 @@ import { useAddLoaiCVan } from '../../../api/LoaiCVan/useLoaiCVan';
 
 
 
-const QLThemLoaiCVan = () => {
+const QLThemLoaiCVan = ({ isUserAllow }) => {
 
     //State
     const [openInner, setOpenInner] = useState(false);
@@ -51,7 +51,7 @@ const QLThemLoaiCVan = () => {
 
     return (
         <Box>
-            <Button variant="outlined" onClick={handleOpen} size='large'>
+            <Button style={{ display: isUserAllow() ? 'none' : 'inline-block' }} variant="outlined" onClick={handleOpen} size='large'>
                 Thêm
             </Button>
             <Dialog

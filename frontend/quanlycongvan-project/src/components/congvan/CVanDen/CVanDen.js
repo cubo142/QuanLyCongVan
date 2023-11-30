@@ -4,16 +4,16 @@ import CVanThem from '../CVanThem';
 import CVanXoa from '../CVanXoa';
 import CVanUpdate from '../CVanUpdate';
 
-const CVanDen = ({ congvandenData }) => {
+const CVanDen = ({ congvandenData, isUserAllow }) => {
 
     //Hiển thị option cho list
     const renderButton = (params) => {
         return (
-            <div style={{ display: "flex" }}>
-                <CVanUpdate kieucvanden={"Công văn đến"} congvandenID={params.row.id} />
+            <div>
+                <CVanUpdate isUserAllow={isUserAllow} kieucvanden={"Công văn đến"} congvandenID={params.row.id} />
                 <div className='space-width' />
-                <CVanXoa congvandenID={params.row.id} />
-            </div>
+                <CVanXoa isUserAllow={isUserAllow} congvandenID={params.row.id} />
+            </div >
         )
     }
 
@@ -34,7 +34,7 @@ const CVanDen = ({ congvandenData }) => {
             }
         },
         { field: 'trangthai', headerName: 'Trạng thái', flex: 1 },
-        { field: 'option', headerName: 'Chức năng', flex: 1, renderCell: renderButton, sortable: false }
+        isUserAllow() ? "" : { field: 'option', headerName: 'Chức năng', flex: 1, renderCell: renderButton, sortable: false }
     ];
 
     //Rows
@@ -53,7 +53,7 @@ const CVanDen = ({ congvandenData }) => {
 
     return (
         <>
-            <div style={{ float: "right" }}><CVanThem kieucvanden={"Công văn đến"} /></div>
+            <div style={{ float: "right" }}><CVanThem isUserAllow={isUserAllow} kieucvanden={"Công văn đến"} /></div>
             <h5>Công văn đến</h5>
             <div style={{ height: '100%', width: '100%' }}>
                 <DataGrid

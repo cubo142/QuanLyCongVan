@@ -8,6 +8,9 @@ import CVanDetail from "./components/congvan/CVanDetail";
 import PageLoaiCVan from './pages/PageLoaiCVan';
 import { Routes, Route } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
+import SignIn from "./components/authentication/SignIn";
+import PageUser from "./pages/PageUser";
+import PageCongVanChuyenDi from "./pages/PageCongVanChuyenDi";
 
 
 const queryClient = new QueryClient({});
@@ -24,6 +27,9 @@ function App() {
           <Route path="congvan" element={<PageCongVan />} />
           <Route path="/congvan/:id" element={<CVanDetail />} />
           <Route path="loaicvan" element={<PageLoaiCVan />} />
+          <Route path="signin" element={<SignIn />} />
+          <Route path="user" element={<PageUser />} />
+          <Route path="canhan" element={<PageCongVanChuyenDi />} />
         </Routes>
       </QueryClientProvider>
     </Layout>

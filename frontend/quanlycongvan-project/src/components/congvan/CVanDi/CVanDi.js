@@ -4,7 +4,7 @@ import CVanThem from '../CVanThem';
 import CVanXoa from '../CVanXoa';
 import CVanUpdate from '../CVanUpdate';
 
-const CVanDi = ({ congvandiData }) => {
+const CVanDi = ({ congvandiData, isUserAllow }) => {
 
     //Hiển thị option cho list
     const renderButton = (params) => {
@@ -29,7 +29,7 @@ const CVanDi = ({ congvandiData }) => {
         { field: 'linhvuc', headerName: 'Lĩnh vực', flex: 1 },
         { field: 'file', headerName: 'File', flex: 1 },
         { field: 'trangthai', headerName: 'Trạng thái', flex: 1 },
-        { field: 'option', headerName: 'Chức năng', flex: 1, renderCell: renderButton, sortable: false }
+        isUserAllow() ? "" : { field: 'option', headerName: 'Chức năng', flex: 1, renderCell: renderButton, sortable: false }
     ];
 
     //Rows
@@ -48,7 +48,7 @@ const CVanDi = ({ congvandiData }) => {
 
     return (
         <>
-            <div style={{ float: "right" }}><CVanThem kieucvandi={"Công văn đi"} /></div>
+            <div style={{ float: "right" }}><CVanThem isUserAllow={isUserAllow} kieucvandi={"Công văn đi"} /></div>
             <h5>Công văn đến</h5>
             <div style={{ height: '100%', width: '100%' }}>
                 <DataGrid

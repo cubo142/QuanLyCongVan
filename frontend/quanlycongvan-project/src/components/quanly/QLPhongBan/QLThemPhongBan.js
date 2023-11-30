@@ -4,7 +4,7 @@ import { useAddPhongBan } from '../../../api/PhongBan/usePhongBan';
 
 
 
-const QLThemPhongBan = () => {
+const QLThemPhongBan = ({ isUserAllow }) => {
 
     //State
     const [openInner, setOpenInner] = useState(false);
@@ -56,7 +56,7 @@ const QLThemPhongBan = () => {
 
     return (
         <Box>
-            <Button variant="outlined" onClick={handleOpen} size='large'>
+            <Button style={{ display: isUserAllow() ? 'none' : 'inline-block' }} variant="outlined" onClick={handleOpen} size='large'>
                 Thêm
             </Button>
             <Dialog

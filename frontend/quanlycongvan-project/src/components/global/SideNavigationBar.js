@@ -2,21 +2,36 @@ import React from 'react';
 import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 import { Link } from 'react-router-dom';
 import { FiHome, FiCheckSquare, FiBookOpen, FiLogOut } from "react-icons/fi";
+import { isUserAllow } from '../../utils/utils';
 
 const SideNavigationBar = () => {
+
+    const isSignInPage = window.location.href === 'http://localhost:3000/signin';
+
+    const handleSignOut = () => {
+        localStorage.clear();
+        window.location.href = '/signin';
+    }
+
+
+
     return (
-        <div style={{ display: 'flex', height: '100vh' }}>
+        <div style={{ display: isSignInPage ? 'none' : 'flex', height: '100vh' }}>
             <Sidebar >
                 <Menu>
                     <MenuItem component={<Link to="/" />}>QUẢN LÝ CÔNG VĂN</MenuItem>
                     {/* Trang chủ */}
                     <MenuItem icon={<FiHome />} component={<Link to="/" />}>Trang Chủ</MenuItem>
-
+                    <SubMenu style={{ display: isUserAllow() ? "" : "none" }} icon={<FiBookOpen />} label="Công văn gửi tới">
+                        <MenuItem component={<Link to="/canhan" />}>Công văn gửi tới</MenuItem>
+                    </SubMenu>
                     {/* Quản lý */}
                     <SubMenu icon={<FiCheckSquare />} label="Quản lý">
                         <MenuItem component={<Link to="/nhanvien" />}>Quản lý nhân viên</MenuItem>
                         <MenuItem component={<Link to="/phongban" />}>Quản lý phòng ban</MenuItem>
                         <MenuItem component={<Link to="/linhvuc" />}>Quản lý lĩnh vực</MenuItem>
+                        <MenuItem component={<Link to="/loaicvan" />}>Quản lý loại công văn</MenuItem>
+                        <MenuItem style={{ display: isUserAllow() ? "none" : "" }} component={<Link to="/user" />}>Quản lý User</MenuItem>
                     </SubMenu>
 
                     {/* Công văn*/}
@@ -24,13 +39,8 @@ const SideNavigationBar = () => {
                         <MenuItem component={<Link to="/congvan" />}>Quản lý công văn</MenuItem>
                     </SubMenu>
 
-                    {/* Loại công văn*/}
-                    <SubMenu icon={<FiBookOpen />} label="Loại công văn">
-                        <MenuItem component={<Link to="/loaicvan" />}>Quản lý loại công văn</MenuItem>
-                    </SubMenu>
-
                     {/* Đăng xuất */}
-                    <MenuItem icon={<FiLogOut />}> Đăng xuất </MenuItem>
+                    <MenuItem onClick={handleSignOut} icon={<FiLogOut />}> Đăng xuất </MenuItem>
                 </Menu>
             </Sidebar>
         </div >
