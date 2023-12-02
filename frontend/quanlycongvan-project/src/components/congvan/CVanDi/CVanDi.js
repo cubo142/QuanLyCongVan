@@ -27,7 +27,11 @@ const CVanDi = ({ congvandiData, isUserAllow }) => {
         { field: 'ngaygui', headerName: 'Ngày gửi', flex: 1 },
         { field: 'loaicvan', headerName: 'Loại công văn', flex: 1 },
         { field: 'linhvuc', headerName: 'Lĩnh vực', flex: 1 },
-        { field: 'file', headerName: 'File', flex: 1 },
+        {
+            field: 'file', headerName: 'File', renderCell: (params) => {
+                return <a href={`http://localhost:8000/congvans/download/${params.row.fileurl}`}>{params.row.file}</a>
+            }
+        },
         { field: 'trangthai', headerName: 'Trạng thái', flex: 1 },
         isUserAllow() ? "" : { field: 'option', headerName: 'Chức năng', flex: 1, renderCell: renderButton, sortable: false }
     ];

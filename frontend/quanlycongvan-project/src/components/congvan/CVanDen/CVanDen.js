@@ -9,7 +9,7 @@ const CVanDen = ({ congvandenData, isUserAllow }) => {
     //Hiển thị option cho list
     const renderButton = (params) => {
         return (
-            <div>
+            <div style={{display:"flex"}}>
                 <CVanUpdate isUserAllow={isUserAllow} kieucvanden={"Công văn đến"} congvandenID={params.row.id} />
                 <div className='space-width' />
                 <CVanXoa isUserAllow={isUserAllow} congvandenID={params.row.id} />
