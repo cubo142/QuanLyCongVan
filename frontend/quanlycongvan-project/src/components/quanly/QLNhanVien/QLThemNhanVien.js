@@ -102,7 +102,7 @@ const QLThemNhanVien = (props) => {
                     <Box
                         component="form"
                         sx={{
-                            '& .MuiTextField-root': { m: 1, width: '30ch' },
+                            '& .MuiTextField-root': { m: 1, width: '28ch' },
                         }}
                         noValidate
                         autoComplete="off">

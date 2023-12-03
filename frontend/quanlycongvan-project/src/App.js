@@ -20,14 +20,15 @@ function App() {
     <Layout>
       <QueryClientProvider client={queryClient}>
         <Routes>
-          <Route path="/" element={<PageTrangChu />} />
+          <Route path="/" element={<SignIn />} />
+          <Route path="/trangchu" element={<PageTrangChu/>}/>
           <Route path="nhanvien" element={<PageQuanLy />} />
           <Route path="phongban" element={<PagePhongBan />} />
           <Route path="linhvuc" element={<PageLinhVuc />} />
           <Route path="congvan" element={<PageCongVan />} />
           <Route path="/congvan/:id" element={<CVanDetail />} />
           <Route path="loaicvan" element={<PageLoaiCVan />} />
-          <Route path="signin" element={<SignIn />} />
+          {/* <Route path="signin" element={<SignIn />} /> */}
           <Route path="user" element={<PageUser />} />
           <Route path="canhan" element={<PageCongVanChuyenDi />} />
         </Routes>

@@ -160,7 +160,7 @@ const CVanThem = ({ kieucvanden, kieucvandi, kieucvannoibo, isUserAllow }) => {
         <form encType="multipart/form-data">
             <Box>
                 {error}
-                <Button style={{ display: isUserAllow() ? 'none' : 'inline-block' }} variant="outlined" onClick={handleOpen} size='large'>
+                <Button variant="outlined" onClick={handleOpen} size='large'>
                     Thêm
                 </Button>
                 <Dialog

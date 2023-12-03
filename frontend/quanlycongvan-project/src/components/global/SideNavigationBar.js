@@ -6,11 +6,11 @@ import { isUserAllow } from '../../utils/utils';
 
 const SideNavigationBar = () => {
 
-    const isSignInPage = window.location.href === 'http://localhost:3000/signin';
+    const isSignInPage = window.location.href === 'http://localhost:3000/';
 
     const handleSignOut = () => {
         localStorage.clear();
-        window.location.href = '/signin';
+        window.location.href = '/';
     }
 
 
@@ -21,7 +21,7 @@ const SideNavigationBar = () => {
                 <Menu>
                     <MenuItem component={<Link to="/" />}>QUẢN LÝ CÔNG VĂN</MenuItem>
                     {/* Trang chủ */}
-                    <MenuItem icon={<FiHome />} component={<Link to="/" />}>Trang Chủ</MenuItem>
+                    <MenuItem icon={<FiHome />} component={<Link to="/trangchu" />}>Trang Chủ</MenuItem>
                     <SubMenu style={{ display: isUserAllow() ? "" : "none" }} icon={<FiBookOpen />} label="Công văn gửi tới">
                         <MenuItem component={<Link to="/canhan" />}>Công văn gửi tới</MenuItem>
                     </SubMenu>

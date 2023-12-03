@@ -71,7 +71,7 @@ const SignIn = () => {
     const onLoginUser = async (user) => {
         try {
             await loginUser.mutateAsync(user)
-            window.location.href = '/'; //sau khi token được authen thì mới chuyển trang "/"
+            window.location.href = '/trangchu'; //sau khi token được authen thì mới chuyển trang "/"
         }
         catch (err) {
             console.log(err)

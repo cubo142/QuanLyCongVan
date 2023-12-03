@@ -57,6 +57,7 @@ const QLThemUser = ({ phongbanData }) => {
 
     //Thêm User
     const onAddUser = async (user) => {
+        console.log(user)
         await addUser.mutateAsync(user)
     }
 
