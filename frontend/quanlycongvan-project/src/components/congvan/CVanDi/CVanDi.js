@@ -10,12 +10,13 @@ const CVanDi = ({ congvandiData, isUserAllow }) => {
     const renderButton = (params) => {
         return (
             <div style={{ display: "flex" }}>
-                <CVanUpdate kieucvandi={"Công văn đi"} congvandiID={params.row.id} />
+                <CVanUpdate isUserAllow={isUserAllow} kieucvanden={"Công văn đến"} congvandenID={params.row.id} />
                 <div className='space-width' />
-                <CVanXoa congvandiID={params.row.id} />
-            </div>
+                <CVanXoa isUserAllow={isUserAllow} congvandenID={params.row.id} />
+            </div >
         )
     }
+
 
     const columns = [
         {
@@ -45,10 +46,10 @@ const CVanDi = ({ congvandiData, isUserAllow }) => {
             loaicvan: item.loaicvan.tenloaicvan,
             linhvuc: item.linhvuc ? item.linhvuc.tenlinhvuc : "N/A",
             file: item.filename,
+            fileurl: item.fileurl,
             trangthai: item.trangthai === 0 ? "Chưa ký duyệt" : "Đã ký duyệt"
         };
     }) : [];
-
 
     return (
         <>

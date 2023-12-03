@@ -6,16 +6,18 @@ import CVanUpdate from '../CVanUpdate';
 
 const CVanNoiBo = ({ congvannoiboData, isUserAllow }) => {
 
+
     //Hiển thị option cho list
     const renderButton = (params) => {
         return (
             <div style={{ display: "flex" }}>
-                <CVanUpdate kieucvannoibo={"Công văn nội bộ"} congvannoiboID={params.row.id} />
+                <CVanUpdate isUserAllow={isUserAllow} kieucvanden={"Công văn đến"} congvandenID={params.row.id} />
                 <div className='space-width' />
-                <CVanXoa congvannoiboID={params.row.id} />
-            </div>
+                <CVanXoa isUserAllow={isUserAllow} congvandenID={params.row.id} />
+            </div >
         )
     }
+
 
     const columns = [
         {
@@ -45,6 +47,7 @@ const CVanNoiBo = ({ congvannoiboData, isUserAllow }) => {
             loaicvan: item.loaicvan.tenloaicvan,
             linhvuc: item.linhvuc ? item.linhvuc.tenlinhvuc : "N/A",
             file: item.filename,
+            fileurl: item.fileurl,
             trangthai: item.trangthai === 0 ? "Chưa ký duyệt" : "Đã ký duyệt"
         };
     }) : [];
