@@ -3,6 +3,8 @@ import { DataGrid } from '@mui/x-data-grid';
 import CVanThem from '../CVanThem';
 import CVanXoa from '../CVanXoa';
 import CVanUpdate from '../CVanUpdate';
+import SearchBar from '../../global/SearchBar';
+import { useState } from 'react';
 
 const CVanNoiBo = ({ congvannoiboData, isUserAllow }) => {
 
@@ -18,6 +20,24 @@ const CVanNoiBo = ({ congvannoiboData, isUserAllow }) => {
         )
     }
 
+    //Search
+    //CongVan được search
+    const [filteredCongVanNoiBo, setFilteredCongVanNoiBo] = useState([]);
+
+    //Search method
+    const handleSearchCongVanNoiBo = (query) => {
+        if (congvannoiboData) {
+            if (query === '') {
+                setFilteredCongVanNoiBo(congvannoiboData);
+            } else {
+                var searchResult = congvannoiboData.filter((congvan) =>
+                    congvan.chudecvan.toLowerCase().indexOf(query.toLowerCase()) !== -1
+                );
+                setFilteredCongVanNoiBo(searchResult);
+            }
+        }
+    }
+
 
     const columns = [
         {
@@ -25,6 +45,7 @@ const CVanNoiBo = ({ congvannoiboData, isUserAllow }) => {
                 return <a href={`/congvan/${params.id}`}>{params.id}</a>;
             },
         },
+        { field: 'chudecvan', headerName: 'Chủ đề', flex: 1 },
         { field: 'kyhieucvan', headerName: 'Ký hiệu', flex: 1 },
         { field: 'ngaygui', headerName: 'Ngày gửi', flex: 1 },
         { field: 'loaicvan', headerName: 'Loại công văn', flex: 1 },
@@ -39,10 +60,11 @@ const CVanNoiBo = ({ congvannoiboData, isUserAllow }) => {
     ];
 
     //Rows
-    const rows = congvannoiboData ? [...congvannoiboData].reverse().map((item) => {
+    const rows = filteredCongVanNoiBo ? [...filteredCongVanNoiBo].reverse().map((item) => {
         return {
             id: item._id,
             kyhieucvan: item.kyhieucvan,
+            chudecvan: item.chudecvan,
             ngaygui: item.ngaygui,
             loaicvan: item.loaicvan.tenloaicvan,
             linhvuc: item.linhvuc ? item.linhvuc.tenlinhvuc : "N/A",
@@ -56,6 +78,7 @@ const CVanNoiBo = ({ congvannoiboData, isUserAllow }) => {
         <>
             <div style={{ float: "right" }}><CVanThem isUserAllow={isUserAllow} kieucvannoibo={"Công văn nội bộ"} /></div>
             <h5>Công văn nội bộ</h5>
+            <SearchBar handleSearchCongVanNoiBo={handleSearchCongVanNoiBo} />
             <div style={{ height: '100%', width: '100%' }}>
                 <DataGrid
                     rows={rows}

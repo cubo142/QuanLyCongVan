@@ -3,6 +3,8 @@ import { DataGrid } from '@mui/x-data-grid';
 import CVanThem from '../CVanThem';
 import CVanXoa from '../CVanXoa';
 import CVanUpdate from '../CVanUpdate';
+import { useState } from 'react';
+import SearchBar from '../../global/SearchBar';
 
 const CVanDi = ({ congvandiData, isUserAllow }) => {
 
@@ -10,13 +12,30 @@ const CVanDi = ({ congvandiData, isUserAllow }) => {
     const renderButton = (params) => {
         return (
             <div style={{ display: "flex" }}>
-                <CVanUpdate isUserAllow={isUserAllow} kieucvanden={"Công văn đến"} congvandenID={params.row.id} />
+                <CVanUpdate isUserAllow={isUserAllow} kieucvandi={"Công văn đến"} congvandiID={params.row.id} />
                 <div className='space-width' />
-                <CVanXoa isUserAllow={isUserAllow} congvandenID={params.row.id} />
+                <CVanXoa isUserAllow={isUserAllow} congvandiID={params.row.id} />
             </div >
         )
     }
 
+    //Search
+    //CongVan được search
+    const [filteredCongVanDi, setFilteredCongVanDi] = useState([]);
+
+    //Search method
+    const handleSearchCongVanDi = (query) => {
+        if (congvandiData) {
+            if (query === '') {
+                setFilteredCongVanDi(congvandiData);
+            } else {
+                var searchResult = congvandiData.filter((congvan) =>
+                    congvan.chudecvan.toLowerCase().indexOf(query.toLowerCase()) !== -1
+                );
+                setFilteredCongVanDi(searchResult);
+            }
+        }
+    }
 
     const columns = [
         {
@@ -24,6 +43,7 @@ const CVanDi = ({ congvandiData, isUserAllow }) => {
                 return <a href={`/congvan/${params.id}`}>{params.id}</a>;
             },
         },
+        { field: 'chudecvan', headerName: 'Chủ đề', flex: 1 },
         { field: 'kyhieucvan', headerName: 'Ký hiệu', flex: 1 },
         { field: 'ngaygui', headerName: 'Ngày gửi', flex: 1 },
         { field: 'loaicvan', headerName: 'Loại công văn', flex: 1 },
@@ -38,10 +58,11 @@ const CVanDi = ({ congvandiData, isUserAllow }) => {
     ];
 
     //Rows
-    const rows = congvandiData ? [...congvandiData].reverse().map((item) => {
+    const rows = filteredCongVanDi ? [...filteredCongVanDi].reverse().map((item) => {
         return {
             id: item._id,
             kyhieucvan: item.kyhieucvan,
+            chudecvan:item.chudecvan,
             ngaygui: item.ngaygui,
             loaicvan: item.loaicvan.tenloaicvan,
             linhvuc: item.linhvuc ? item.linhvuc.tenlinhvuc : "N/A",
@@ -55,6 +76,7 @@ const CVanDi = ({ congvandiData, isUserAllow }) => {
         <>
             <div style={{ float: "right" }}><CVanThem isUserAllow={isUserAllow} kieucvandi={"Công văn đi"} /></div>
             <h5>Công văn đến</h5>
+            <SearchBar handleSearchCongVanDi={handleSearchCongVanDi} />
             <div style={{ height: '100%', width: '100%' }}>
                 <DataGrid
                     rows={rows}

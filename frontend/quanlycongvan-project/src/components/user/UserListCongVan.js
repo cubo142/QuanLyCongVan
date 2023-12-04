@@ -4,8 +4,6 @@ import { DataGrid } from '@mui/x-data-grid';
 import SearchBar from '../global/SearchBar';
 import '../quanly/quanly.css'
 import { useState } from 'react';
-import { useEffect } from 'react';
-import { useGetPhongBan } from '../../api/PhongBan/usePhongBan';
 import { useGetCongVan } from '../../api/CongVan/useCongVan';
 import { useGetUserById } from '../../api/User/useUser';
 
@@ -24,7 +22,7 @@ const UserListCongVan = () => {
     //Lấy data
     const { data: congvanData } = useGetCongVan();
     const { data: userData } = useGetUserById(userID);
-    const [filteredData, setFilteredData] = useState([]);
+
     //function
     // Hàm lọc để lấy danh sách công văn
     let danhSachCongVan = null;
@@ -37,37 +35,27 @@ const UserListCongVan = () => {
         });
 
     }
-    console.log(danhSachCongVan)
 
 
-    // //useEffect
-    // useEffect(() => {
-    //     if (danhSachCongVan) {
-    //         setFilteredData(danhSachCongVan)
-    //     }
-    // }, [danhSachCongVan])
+
 
     //******* Chức năng search *******
-    //User được search
-    const [filteredUser, setFilteredUser] = useState("");
-
-
-    //useEffect
-    useEffect(() => {
-        if (userData) {
-            setFilteredUser(userData)
-        }
-    }, [userData])
+    //NhanVien được search
+    const [filteredCongVan, setFilteredCongVan] = useState([]);
 
     //Search method
-    const handleSearchUser = (query) => {
-        if (userData) {
-            var searchResult = userData.filter((user) => user.tenuser.toLowerCase().indexOf(query.toLowerCase()) !== -1); //đưa tất cả về lowercase
-            setFilteredUser(searchResult);
+    const handleSearchCongVan = (query) => {
+        if (danhSachCongVan) {
+            if (query === '') {
+                setFilteredCongVan(danhSachCongVan);
+            } else {
+                var searchResult = danhSachCongVan.filter((congvan) =>
+                    congvan.chudecvan.toLowerCase().indexOf(query.toLowerCase()) !== -1
+                );
+                setFilteredCongVan(searchResult);
+            }
         }
-
     }
-
     //*************************************/
 
 
@@ -78,6 +66,7 @@ const UserListCongVan = () => {
                 return <a href={`/congvan/${params.id}`}>{params.id}</a>;
             },
         },
+        { field: 'chudecvan', headerName: 'Chủ đề', flex: 1 },
         { field: 'kyhieucvan', headerName: 'Ký hiệu', flex: 1 },
         { field: 'ngaygui', headerName: 'Ngày gửi', flex: 1 },
         { field: 'loaicvan', headerName: 'Loại công văn', flex: 1 },
@@ -92,9 +81,10 @@ const UserListCongVan = () => {
     ];
 
     //Rows
-    const rows = danhSachCongVan ? [...danhSachCongVan].reverse().map((item) => {
+    const rows = filteredCongVan ? [...filteredCongVan].reverse().map((item) => {
         return {
             id: item._id,
+            chudecvan: item.chudecvan,
             kyhieucvan: item.kyhieucvan,
             ngaygui: item.ngaygui,
             loaicvan: item.loaicvan.tenloaicvan,
@@ -110,7 +100,7 @@ const UserListCongVan = () => {
         <Box style={pageStyle}>
             <div className='app-bar'>
                 <div className="search-bar">
-                    <SearchBar handleSearchUser={handleSearchUser} />
+                    <SearchBar handleSearchCongVan={handleSearchCongVan} />
                 </div>
                 <div className='space-width' />
             </div>
