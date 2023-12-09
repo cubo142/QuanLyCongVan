@@ -31,7 +31,7 @@ const SideNavigationBar = () => {
                         <MenuItem component={<Link to="/phongban" />}>Quản lý phòng ban</MenuItem>
                         <MenuItem component={<Link to="/linhvuc" />}>Quản lý lĩnh vực</MenuItem>
                         <MenuItem component={<Link to="/loaicvan" />}>Quản lý loại công văn</MenuItem>
-                        <MenuItem style={{ display: isUserAllow() ? "none" : "" }} component={<Link to="/user" />}>Quản lý User</MenuItem>
+                        <MenuItem style={{ display: isUserAllow() ? "none" : "" }} component={<Link to="/user" />}>Quản lý người dùng</MenuItem>
                     </SubMenu>
 
                     {/* Công văn*/}

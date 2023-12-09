@@ -52,7 +52,6 @@ const CVanMain = () => {
             setCongVanDiData(congvandi)
             setCongVanNoiBoData(congvannoibo)
 
-
         }
     }, [congvanData])
 
